@@ -1,0 +1,452 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Cards API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Cards
+paths:
+  /api/credit-cards:
+    post:
+      operationId: postApiCreditCards
+      tags:
+      - Cards
+      summary: Store a credit card
+      description: Store card details as an encrypted agent payment method for checkout. Prefer dashboard tokenization when possible; use this endpoint only for trusted agent flows that already have the user's card details.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCreditCardRequest'
+            example:
+              card_number: '4111111111111111'
+              expiration: 12/2030
+              cvc: '123'
+              cardholder_name: Jane Doe
+              email: jane@example.com
+              billing_address:
+                line1: 123 Market St
+                city: San Francisco
+                state: CA
+                postal_code: '94105'
+                country: US
+              shipping_address:
+                line1: 123 Market St
+                city: San Francisco
+                state: CA
+                postal_code: '94105'
+                country: US
+                phone: '+14155550123'
+      responses:
+        '200':
+          description: Successful response.
+    get:
+      operationId: getApiCreditCards
+      tags:
+      - Cards
+      summary: List stored credit card payment methods
+      description: List saved credit card payment methods for the agent, including the default payment method. Raw card numbers and CVCs are not returned.
+      parameters:
+      - name: agentId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Required when not authenticating with an agent API key.
+      responses:
+        '200':
+          description: Successful response.
+  /api/agents/{id}/link-payment-methods/link:
+    post:
+      operationId: postApiAgentsIdLinkPaymentMethodsLink
+      tags:
+      - Cards
+      summary: Connect or save a Link payment method
+      description: Start Link setup, or save a selected Link payment method with contact and shipping data after the user completes Link.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkPaymentMethodRequest'
+            example:
+              clientName: Checkout
+      responses:
+        '200':
+          description: Successful response.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agent ID.
+  /api/agents/{id}/link-payment-methods/credential:
+    post:
+      operationId: postApiAgentsIdLinkPaymentMethodsCredential
+      tags:
+      - Cards
+      summary: Create a Link payment credential
+      description: Generate a one-time card credential from a saved Link payment method for a specific merchant and amount.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkPaymentCredentialRequest'
+            example:
+              linkPaymentMethodId: lpm_123
+              amount: '25.00'
+              currency: USD
+              merchantName: Example
+              merchantUrl: https://example.com
+      responses:
+        '200':
+          description: Successful response.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agent ID.
+  /api/cards:
+    post:
+      operationId: postApiCards
+      tags:
+      - Cards
+      summary: Get a checkout card
+      description: Fetch a usable checkout card from Sponge Card or a vaulted card source. If more than one card source is available, the API can return a selection response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCardRequest'
+            example:
+              card_type: sponge_card
+              amount: '25.00'
+              currency: USD
+              merchant_name: Example
+              merchant_url: https://example.com
+      responses:
+        '200':
+          description: Successful response.
+  /api/virtual-cards:
+    post:
+      operationId: postApiVirtualCards
+      tags:
+      - Cards
+      summary: Issue a virtual card
+      description: Issue a per-transaction virtual card for a specific merchant and amount.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueVirtualCardRequest'
+            example:
+              amount: '25.00'
+              currency: USD
+              merchant_name: Example
+              merchant_url: https://example.com
+      responses:
+        '200':
+          description: Successful response.
+  /api/card-usage:
+    post:
+      operationId: postApiCardUsage
+      tags:
+      - Cards
+      summary: Report card usage
+      description: Report the outcome of a purchase attempt that used a stored or vaulted card.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportCardUsageRequest'
+            example:
+              payment_method_id: pm_123
+              status: success
+              amount: '25.00'
+              currency: USD
+              merchant_name: Example
+      responses:
+        '200':
+          description: Successful response.
+components:
+  schemas:
+    IssueVirtualCardRequest:
+      type: object
+      required:
+      - amount
+      - merchant_name
+      - merchant_url
+      properties:
+        amount:
+          type: string
+        currency:
+          type: string
+          description: ISO 4217 currency code. Defaults to USD.
+        merchant_name:
+          type: string
+        merchant_url:
+          type: string
+        merchant_country_code:
+          type: string
+        description:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductLineItem'
+        shipping_address:
+          $ref: '#/components/schemas/VirtualCardShippingAddress'
+        enrollment_id:
+          type: string
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+    LinkPaymentCredentialRequest:
+      type: object
+      properties:
+        linkPaymentMethodId:
+          type: string
+          description: Saved Sponge or Link payment method ID.
+        spendRequestId:
+          type: string
+          description: Spend request ID returned by a previous approval_required response.
+        amount:
+          type: string
+          description: Purchase amount, for example 49.99.
+        currency:
+          type: string
+          description: ISO 4217 currency code. Defaults to USD.
+        merchantName:
+          type: string
+        merchantUrl:
+          type: string
+        context:
+          type: string
+    CardShippingAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - state
+      - postal_code
+      - country
+      - phone
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+    ReportCardUsageRequest:
+      type: object
+      required:
+      - payment_method_id
+      - status
+      properties:
+        payment_method_id:
+          type: string
+        merchant_name:
+          type: string
+        merchant_domain:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - failed
+          - cancelled
+        failure_reason:
+          type: string
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+    LinkPaymentMethodRequest:
+      type: object
+      properties:
+        linkPaymentMethodId:
+          type: string
+          description: Link payment method ID. Required when multiple methods are available.
+        setAsDefault:
+          type: boolean
+        clientName:
+          type: string
+        email:
+          type: string
+          description: Required when saving the method.
+        phone:
+          type: string
+          description: Required when saving the method.
+        billing:
+          $ref: '#/components/schemas/LinkAddress'
+        shipping:
+          $ref: '#/components/schemas/LinkAddress'
+    StoreCreditCardRequest:
+      type: object
+      required:
+      - card_number
+      - cvc
+      - cardholder_name
+      - email
+      - billing_address
+      - shipping_address
+      properties:
+        card_number:
+          type: string
+          description: Card number.
+        expiry_month:
+          type: string
+          description: Expiry month, used with expiry_year.
+        expiry_year:
+          type: string
+          description: Expiry year, used with expiry_month.
+        expiration:
+          type: string
+          description: Expiration in MM/YYYY format.
+        cvc:
+          type: string
+          description: Card verification code.
+        cardholder_name:
+          type: string
+        email:
+          type: string
+        billing_address:
+          $ref: '#/components/schemas/CardBillingAddress'
+        shipping_address:
+          $ref: '#/components/schemas/CardShippingAddress'
+        label:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+    CardBillingAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - state
+      - postal_code
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+    GetCardRequest:
+      type: object
+      properties:
+        card_type:
+          type: string
+          enum:
+          - sponge_card
+          - basis_theory_vaulted
+        payment_method_id:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        merchant_name:
+          type: string
+        merchant_url:
+          type: string
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+    LinkAddress:
+      type: object
+      required:
+      - name
+      - line1
+      - city
+      - state
+      - postalCode
+      - country
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    VirtualCardShippingAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - state
+      - postal_code
+      - country_code
+      properties:
+        line1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country_code:
+          type: string
+    ProductLineItem:
+      type: object
+      required:
+      - name
+      - price
+      - quantity
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        quantity:
+          type: number
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

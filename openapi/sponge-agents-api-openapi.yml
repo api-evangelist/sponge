@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Agents
+paths:
+  /api/agents/me:
+    get:
+      operationId: getApiAgentsMe
+      tags:
+      - Agents
+      summary: Get current agent
+      description: Get current agent via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/agents/:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                agentType:
+                  type: string
+                dailySpendingLimit:
+                  type: string
+                weeklySpendingLimit:
+                  type: string
+                monthlySpendingLimit:
+                  type: string
+                metadata:
+                  type: object
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                agentType:
+                  type: string
+                dailySpendingLimit:
+                  type: string
+                weeklySpendingLimit:
+                  type: string
+                monthlySpendingLimit:
+                  type: string
+                metadata:
+                  type: object
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                agentType:
+                  type: string
+                dailySpendingLimit:
+                  type: string
+                weeklySpendingLimit:
+                  type: string
+                monthlySpendingLimit:
+                  type: string
+                metadata:
+                  type: object
+      operationId: postApiAgents
+      tags:
+      - Agents
+      summary: List or create agents
+      description: List or create agents via POST.
+      responses:
+        '200':
+          description: Successful response.
+    get:
+      parameters:
+      - name: includeBalances
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiAgents
+      tags:
+      - Agents
+      summary: List or create agents
+      description: List or create agents via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/agents/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: includeBalances
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiAgentsById
+      tags:
+      - Agents
+      summary: Get, update, or delete an agent
+      description: Get, update, or delete an agent via GET.
+      responses:
+        '200':
+          description: Successful response.
+    put:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                agentType:
+                  type: string
+                status:
+                  type: string
+                dailySpendingLimit:
+                  type: string
+                weeklySpendingLimit:
+                  type: string
+                monthlySpendingLimit:
+                  type: string
+                metadata:
+                  type: object
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                agentType:
+                  type: string
+                status:
+                  type: string
+                dailySpendingLimit:
+                  type: string
+                weeklySpendingLimit:
+                  type: string
+                monthlySpendingLimit:
+                  type: string
+                metadata:
+                  type: object
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                agentType:
+                  type: string
+                status:
+                  type: string
+                dailySpendingLimit:
+                  type: string
+                weeklySpendingLimit:
+                  type: string
+                monthlySpendingLimit:
+                  type: string
+                metadata:
+                  type: object
+      operationId: putApiAgentsById
+      tags:
+      - Agents
+      summary: Get, update, or delete an agent
+      description: Get, update, or delete an agent via PUT.
+      responses:
+        '200':
+          description: Successful response.
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: deleteApiAgentsById
+      tags:
+      - Agents
+      summary: Get, update, or delete an agent
+      description: Get, update, or delete an agent via DELETE.
+      responses:
+        '204':
+          description: Successful response with no content.
+  /api/agents/{id}/api-key:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: getApiAgentsByIdApi-key
+      tags:
+      - Agents
+      summary: Get agent API key metadata
+      description: Get agent API key metadata via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/agents/{id}/regenerate-key:
+    post:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      operationId: postApiAgentsByIdRegenerate-key
+      tags:
+      - Agents
+      summary: Regenerate an agent API key
+      description: Regenerate an agent API key via POST.
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

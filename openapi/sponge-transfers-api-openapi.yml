@@ -1,0 +1,502 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Transfers API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Transfers
+paths:
+  /api/transfers/evm:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - chain
+              - to
+              - amount
+              - currency
+              properties:
+                chain:
+                  type: string
+                to:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                  enum:
+                  - ETH
+                  - USDC
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - chain
+              - to
+              - amount
+              - currency
+              properties:
+                chain:
+                  type: string
+                to:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                  enum:
+                  - ETH
+                  - USDC
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - chain
+              - to
+              - amount
+              - currency
+              properties:
+                chain:
+                  type: string
+                to:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                  enum:
+                  - ETH
+                  - USDC
+      operationId: postApiTransfersEvm
+      tags:
+      - Transfers
+      summary: Send an EVM transfer
+      description: Send an EVM transfer via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/transfers/solana:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - chain
+              - to
+              - amount
+              - currency
+              properties:
+                chain:
+                  type: string
+                to:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                  enum:
+                  - SOL
+                  - USDC
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - chain
+              - to
+              - amount
+              - currency
+              properties:
+                chain:
+                  type: string
+                to:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                  enum:
+                  - SOL
+                  - USDC
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - chain
+              - to
+              - amount
+              - currency
+              properties:
+                chain:
+                  type: string
+                to:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                  enum:
+                  - SOL
+                  - USDC
+      operationId: postApiTransfersSolana
+      tags:
+      - Transfers
+      summary: Send a Solana transfer
+      description: Send a Solana transfer via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/solana/tokens:
+    get:
+      parameters:
+      - name: chain
+        in: query
+        required: true
+        schema:
+          type: string
+      operationId: getApiSolanaTokens
+      tags:
+      - Transfers
+      summary: List Solana wallet tokens
+      description: List Solana wallet tokens via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/solana/tokens/search:
+    get:
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiSolanaTokensSearch
+      tags:
+      - Transfers
+      summary: Search Solana tokens
+      description: Search Solana tokens via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/transactions/history:
+    get:
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: chain
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiTransactionsHistory
+      tags:
+      - Transfers
+      summary: Get transaction history
+      description: Get transaction history via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/transactions/status/{txHash}:
+    get:
+      parameters:
+      - name: txHash
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: chain
+        in: query
+        required: true
+        schema:
+          type: string
+      operationId: getApiTransactionsStatusByTxHash
+      tags:
+      - Transfers
+      summary: Get transaction status
+      description: Get transaction status via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/transactions/swap:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - chain
+              - inputToken
+              - outputToken
+              - amount
+              properties:
+                chain:
+                  type: string
+                inputToken:
+                  type: string
+                outputToken:
+                  type: string
+                amount:
+                  type: string
+                slippageBps:
+                  type: number
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - chain
+              - inputToken
+              - outputToken
+              - amount
+              properties:
+                chain:
+                  type: string
+                inputToken:
+                  type: string
+                outputToken:
+                  type: string
+                amount:
+                  type: string
+                slippageBps:
+                  type: number
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - chain
+              - inputToken
+              - outputToken
+              - amount
+              properties:
+                chain:
+                  type: string
+                inputToken:
+                  type: string
+                outputToken:
+                  type: string
+                amount:
+                  type: string
+                slippageBps:
+                  type: number
+      operationId: postApiTransactionsSwap
+      tags:
+      - Transfers
+      summary: Swap on Solana
+      description: Swap on Solana via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/transactions/base-swap:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - chain
+              - inputToken
+              - outputToken
+              - amount
+              properties:
+                chain:
+                  type: string
+                inputToken:
+                  type: string
+                outputToken:
+                  type: string
+                amount:
+                  type: string
+                slippageBps:
+                  type: number
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - chain
+              - inputToken
+              - outputToken
+              - amount
+              properties:
+                chain:
+                  type: string
+                inputToken:
+                  type: string
+                outputToken:
+                  type: string
+                amount:
+                  type: string
+                slippageBps:
+                  type: number
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - chain
+              - inputToken
+              - outputToken
+              - amount
+              properties:
+                chain:
+                  type: string
+                inputToken:
+                  type: string
+                outputToken:
+                  type: string
+                amount:
+                  type: string
+                slippageBps:
+                  type: number
+      operationId: postApiTransactionsBase-swap
+      tags:
+      - Transfers
+      summary: Swap on Base
+      description: Swap on Base via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/transactions/bridge:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sourceChain
+              - destinationChain
+              - token
+              - amount
+              properties:
+                sourceChain:
+                  type: string
+                  enum:
+                  - ethereum
+                  - base
+                  - polygon
+                  - arbitrum-one
+                  - hyperliquid
+                  - solana
+                destinationChain:
+                  type: string
+                  enum:
+                  - ethereum
+                  - base
+                  - polygon
+                  - arbitrum-one
+                  - hyperliquid
+                  - solana
+                token:
+                  type: string
+                amount:
+                  type: string
+                destinationToken:
+                  type: string
+                recipientAddress:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - sourceChain
+              - destinationChain
+              - token
+              - amount
+              properties:
+                sourceChain:
+                  type: string
+                  enum:
+                  - ethereum
+                  - base
+                  - polygon
+                  - arbitrum-one
+                  - hyperliquid
+                  - solana
+                destinationChain:
+                  type: string
+                  enum:
+                  - ethereum
+                  - base
+                  - polygon
+                  - arbitrum-one
+                  - hyperliquid
+                  - solana
+                token:
+                  type: string
+                amount:
+                  type: string
+                destinationToken:
+                  type: string
+                recipientAddress:
+                  type: string
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - sourceChain
+              - destinationChain
+              - token
+              - amount
+              properties:
+                sourceChain:
+                  type: string
+                  enum:
+                  - ethereum
+                  - base
+                  - polygon
+                  - arbitrum-one
+                  - hyperliquid
+                  - solana
+                destinationChain:
+                  type: string
+                  enum:
+                  - ethereum
+                  - base
+                  - polygon
+                  - arbitrum-one
+                  - hyperliquid
+                  - solana
+                token:
+                  type: string
+                amount:
+                  type: string
+                destinationToken:
+                  type: string
+                recipientAddress:
+                  type: string
+      operationId: postApiTransactionsBridge
+      tags:
+      - Transfers
+      summary: Bridge across chains
+      description: Bridge across chains via POST.
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

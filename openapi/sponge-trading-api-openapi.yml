@@ -1,0 +1,284 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Trading API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Trading
+paths:
+  /api/hyperliquid:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - status
+                  - order
+                  - cancel
+                  - cancel_all
+                  - set_leverage
+                  - positions
+                  - orders
+                  - fills
+                  - markets
+                  - ticker
+                  - orderbook
+                  - funding
+                  - withdraw
+                  - transfer
+                  - set_abstraction
+                symbol:
+                  type: string
+                side:
+                  type: string
+                  enum:
+                  - buy
+                  - sell
+                type:
+                  type: string
+                  enum:
+                  - limit
+                  - market
+                amount:
+                  type: string
+                price:
+                  type: string
+                reduce_only:
+                  type: boolean
+                trigger_price:
+                  type: string
+                tp_sl:
+                  type: string
+                  enum:
+                  - tp
+                  - sl
+                tif:
+                  type: string
+                  enum:
+                  - GTC
+                  - IOC
+                  - PO
+                order_id:
+                  type: string
+                leverage:
+                  type: number
+                since:
+                  type: number
+                limit:
+                  type: number
+                offset:
+                  type: number
+                query:
+                  type: string
+                market_type:
+                  type: string
+                  enum:
+                  - spot
+                  - swap
+                full:
+                  type: boolean
+                destination:
+                  type: string
+                to_perp:
+                  type: boolean
+                abstraction:
+                  type: string
+                  enum:
+                  - disabled
+                  - unifiedAccount
+                  - portfolioMargin
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - status
+                  - order
+                  - cancel
+                  - cancel_all
+                  - set_leverage
+                  - positions
+                  - orders
+                  - fills
+                  - markets
+                  - ticker
+                  - orderbook
+                  - funding
+                  - withdraw
+                  - transfer
+                  - set_abstraction
+                symbol:
+                  type: string
+                side:
+                  type: string
+                  enum:
+                  - buy
+                  - sell
+                type:
+                  type: string
+                  enum:
+                  - limit
+                  - market
+                amount:
+                  type: string
+                price:
+                  type: string
+                reduce_only:
+                  type: boolean
+                trigger_price:
+                  type: string
+                tp_sl:
+                  type: string
+                  enum:
+                  - tp
+                  - sl
+                tif:
+                  type: string
+                  enum:
+                  - GTC
+                  - IOC
+                  - PO
+                order_id:
+                  type: string
+                leverage:
+                  type: number
+                since:
+                  type: number
+                limit:
+                  type: number
+                offset:
+                  type: number
+                query:
+                  type: string
+                market_type:
+                  type: string
+                  enum:
+                  - spot
+                  - swap
+                full:
+                  type: boolean
+                destination:
+                  type: string
+                to_perp:
+                  type: boolean
+                abstraction:
+                  type: string
+                  enum:
+                  - disabled
+                  - unifiedAccount
+                  - portfolioMargin
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - action
+              properties:
+                action:
+                  type: string
+                  enum:
+                  - status
+                  - order
+                  - cancel
+                  - cancel_all
+                  - set_leverage
+                  - positions
+                  - orders
+                  - fills
+                  - markets
+                  - ticker
+                  - orderbook
+                  - funding
+                  - withdraw
+                  - transfer
+                  - set_abstraction
+                symbol:
+                  type: string
+                side:
+                  type: string
+                  enum:
+                  - buy
+                  - sell
+                type:
+                  type: string
+                  enum:
+                  - limit
+                  - market
+                amount:
+                  type: string
+                price:
+                  type: string
+                reduce_only:
+                  type: boolean
+                trigger_price:
+                  type: string
+                tp_sl:
+                  type: string
+                  enum:
+                  - tp
+                  - sl
+                tif:
+                  type: string
+                  enum:
+                  - GTC
+                  - IOC
+                  - PO
+                order_id:
+                  type: string
+                leverage:
+                  type: number
+                since:
+                  type: number
+                limit:
+                  type: number
+                offset:
+                  type: number
+                query:
+                  type: string
+                market_type:
+                  type: string
+                  enum:
+                  - spot
+                  - swap
+                full:
+                  type: boolean
+                destination:
+                  type: string
+                to_perp:
+                  type: boolean
+                abstraction:
+                  type: string
+                  enum:
+                  - disabled
+                  - unifiedAccount
+                  - portfolioMargin
+      operationId: postApiHyperliquid
+      tags:
+      - Trading
+      summary: Trade on Hyperliquid
+      description: Trade on Hyperliquid via POST.
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

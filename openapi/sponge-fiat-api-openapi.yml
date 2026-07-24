@@ -1,0 +1,390 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Fiat API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Fiat
+paths:
+  /api/onramp/crypto:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - wallet_address
+              properties:
+                wallet_address:
+                  type: string
+                provider:
+                  type: string
+                  enum:
+                  - auto
+                  - stripe
+                  - coinbase
+                chain:
+                  type: string
+                  enum:
+                  - base
+                  - solana
+                  - polygon
+                fiat_amount:
+                  type: string
+                fiat_currency:
+                  type: string
+                lock_wallet_address:
+                  type: boolean
+                redirect_url:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - wallet_address
+              properties:
+                wallet_address:
+                  type: string
+                provider:
+                  type: string
+                  enum:
+                  - auto
+                  - stripe
+                  - coinbase
+                chain:
+                  type: string
+                  enum:
+                  - base
+                  - solana
+                  - polygon
+                fiat_amount:
+                  type: string
+                fiat_currency:
+                  type: string
+                lock_wallet_address:
+                  type: boolean
+                redirect_url:
+                  type: string
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - wallet_address
+              properties:
+                wallet_address:
+                  type: string
+                provider:
+                  type: string
+                  enum:
+                  - auto
+                  - stripe
+                  - coinbase
+                chain:
+                  type: string
+                  enum:
+                  - base
+                  - solana
+                  - polygon
+                fiat_amount:
+                  type: string
+                fiat_currency:
+                  type: string
+                lock_wallet_address:
+                  type: boolean
+                redirect_url:
+                  type: string
+      operationId: postApiOnrampCrypto
+      tags:
+      - Fiat
+      summary: Create a crypto onramp quote
+      description: Create a crypto onramp quote via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/coinbase-onramp/status:
+    get:
+      operationId: getApiCoinbase-onrampStatus
+      tags:
+      - Fiat
+      summary: Get Coinbase onramp status
+      description: Get Coinbase onramp status via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/coinbase-onramp/supported:
+    get:
+      operationId: getApiCoinbase-onrampSupported
+      tags:
+      - Fiat
+      summary: List Coinbase onramp support
+      description: List Coinbase onramp support via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/coinbase-onramp/url:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - chainId
+                    - address
+                    properties:
+                      chainId:
+                        type: number
+                      address:
+                        type: string
+                defaultChainId:
+                  type: number
+                defaultAsset:
+                  type: string
+                presetFiatAmount:
+                  type: number
+                fiatCurrency:
+                  type: string
+                redirectUrl:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - chainId
+                    - address
+                    properties:
+                      chainId:
+                        type: number
+                      address:
+                        type: string
+                defaultChainId:
+                  type: number
+                defaultAsset:
+                  type: string
+                presetFiatAmount:
+                  type: number
+                fiatCurrency:
+                  type: string
+                redirectUrl:
+                  type: string
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - chainId
+                    - address
+                    properties:
+                      chainId:
+                        type: number
+                      address:
+                        type: string
+                defaultChainId:
+                  type: number
+                defaultAsset:
+                  type: string
+                presetFiatAmount:
+                  type: number
+                fiatCurrency:
+                  type: string
+                redirectUrl:
+                  type: string
+      operationId: postApiCoinbase-onrampUrl
+      tags:
+      - Fiat
+      summary: Create a Coinbase onramp URL
+      description: Create a Coinbase onramp URL via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/coinbase-onramp/session/{sessionToken}/status:
+    get:
+      parameters:
+      - name: sessionToken
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: getApiCoinbase-onrampSessionBySessionTokenStatus
+      tags:
+      - Fiat
+      summary: Get Coinbase session status
+      description: Get Coinbase session status via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/coinbase-onramp/session/{sessionToken}/abandon:
+    post:
+      parameters:
+      - name: sessionToken
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: postApiCoinbase-onrampSessionBySessionTokenAbandon
+      tags:
+      - Fiat
+      summary: Abandon a Coinbase session
+      description: Abandon a Coinbase session via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/stripe-onramp/status:
+    get:
+      operationId: getApiStripe-onrampStatus
+      tags:
+      - Fiat
+      summary: Get Stripe onramp status
+      description: Get Stripe onramp status via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/stripe-onramp/supported:
+    get:
+      operationId: getApiStripe-onrampSupported
+      tags:
+      - Fiat
+      summary: List Stripe onramp support
+      description: List Stripe onramp support via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/stripe-onramp/session:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - chainId
+                    - address
+                    properties:
+                      chainId:
+                        type: number
+                      address:
+                        type: string
+                lockWalletAddress:
+                  type: boolean
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - chainId
+                    - address
+                    properties:
+                      chainId:
+                        type: number
+                      address:
+                        type: string
+                lockWalletAddress:
+                  type: boolean
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - addresses
+              properties:
+                addresses:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - chainId
+                    - address
+                    properties:
+                      chainId:
+                        type: number
+                      address:
+                        type: string
+                lockWalletAddress:
+                  type: boolean
+      operationId: postApiStripe-onrampSession
+      tags:
+      - Fiat
+      summary: Create a Stripe onramp session
+      description: Create a Stripe onramp session via POST.
+      responses:
+        '200':
+          description: Successful response.
+  /api/stripe-onramp/session/{sessionId}/status:
+    get:
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: getApiStripe-onrampSessionBySessionIdStatus
+      tags:
+      - Fiat
+      summary: Get Stripe session status
+      description: Get Stripe session status via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/stripe-onramp/session/{sessionId}/abandon:
+    post:
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: postApiStripe-onrampSessionBySessionIdAbandon
+      tags:
+      - Fiat
+      summary: Abandon a Stripe session
+      description: Abandon a Stripe session via POST.
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

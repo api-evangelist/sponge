@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents MPP API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: MPP
+paths:
+  /api/mpp/fetch:
+    post:
+      operationId: postApiMppFetch
+      tags:
+      - MPP
+      summary: Fetch with MPP auto-pay
+      description: Make one paid Tempo request with automatic MPP handling.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                chain:
+                  type: string
+                  enum:
+                  - tempo
+                url:
+                  type: string
+                method:
+                  type: string
+                  enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+                body: {}
+            example:
+              chain: tempo
+              url: https://api.example.com/tempo
+              method: GET
+      responses:
+        '200':
+          description: Successful response.
+  /api/mpp/session/start:
+    post:
+      operationId: postApiMppSessionStart
+      tags:
+      - MPP
+      summary: Start an MPP session
+      description: Open a Tempo MPP session for repeated paid requests.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chain:
+                  type: string
+                  enum:
+                  - tempo
+                max_deposit:
+                  type: string
+                deposit:
+                  type: string
+            example:
+              chain: tempo
+              max_deposit: '5'
+              deposit: '2'
+      responses:
+        '200':
+          description: Successful response.
+  /api/mpp/session/request:
+    post:
+      operationId: postApiMppSessionRequest
+      tags:
+      - MPP
+      summary: Send an MPP session request
+      description: Use an existing Tempo MPP session for a paid request. Set stream=true for SSE responses.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - session_id
+              - url
+              properties:
+                session_id:
+                  type: string
+                url:
+                  type: string
+                method:
+                  type: string
+                  enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+                body: {}
+                stream:
+                  type: boolean
+            example:
+              session_id: session_123
+              url: https://api.example.com/tempo-stream
+              method: GET
+      responses:
+        '200':
+          description: Successful response.
+  /api/mpp/session/close:
+    post:
+      operationId: postApiMppSessionClose
+      tags:
+      - MPP
+      summary: Close an MPP session
+      description: Close an MPP session and release any unused deposit.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - session_id
+              properties:
+                session_id:
+                  type: string
+                reason:
+                  type: string
+            example:
+              session_id: session_123
+              reason: done
+      responses:
+        '200':
+          description: Successful response.
+  /api/mpp/sessions:
+    get:
+      operationId: getApiMppSessions
+      tags:
+      - MPP
+      summary: List MPP sessions
+      description: List recent MPP sessions for the current agent.
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

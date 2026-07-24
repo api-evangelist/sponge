@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Wallet API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Wallet
+paths:
+  /api/balances:
+    get:
+      parameters:
+      - name: chain
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: allowedChains
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: onlyUsdc
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiBalances
+      tags:
+      - Wallet
+      summary: Get detailed balances
+      description: Get detailed balances via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/wallets/:
+    get:
+      parameters:
+      - name: includeBalances
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiWallets
+      tags:
+      - Wallet
+      summary: List wallets
+      description: List wallets via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/wallets/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      operationId: getApiWalletsById
+      tags:
+      - Wallet
+      summary: Get wallet details
+      description: Get wallet details via GET.
+      responses:
+        '200':
+          description: Successful response.
+  /api/wallets/{id}/balance:
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: chainId
+        in: query
+        required: false
+        schema:
+          type: string
+      operationId: getApiWalletsByIdBalance
+      tags:
+      - Wallet
+      summary: Get wallet balance
+      description: Get wallet balance via GET.
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

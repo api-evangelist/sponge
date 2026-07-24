@@ -1,0 +1,265 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Sponge Card API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Sponge Card
+paths:
+  /api/sponge-card/status:
+    get:
+      operationId: getApiSpongeCardStatus
+      tags:
+      - Sponge Card
+      summary: Get Sponge Card status
+      description: Get Sponge Card onboarding, consent, card, and balance status. Spending power fields include both cents and formatted USD display values.
+      parameters:
+      - name: agentId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Required when not authenticating with an agent API key.
+      - name: refresh
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Force-refresh issuer application status.
+      responses:
+        '200':
+          description: Successful response.
+  /api/sponge-card/onboard:
+    post:
+      operationId: postApiSpongeCardOnboard
+      tags:
+      - Sponge Card
+      summary: Start Sponge Card onboarding
+      description: Start Sponge Card onboarding, return a KYC verification link when needed, or continue the issuer application after KYC.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpongeCardOnboardRequest'
+            example:
+              redirect_uri: https://example.com/kyc-return
+      responses:
+        '200':
+          description: Successful response.
+  /api/sponge-card/terms:
+    post:
+      operationId: postApiSpongeCardTerms
+      tags:
+      - Sponge Card
+      summary: Accept Sponge Card terms
+      description: Record Sponge Card consent acknowledgements for an existing application.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpongeCardTermsRequest'
+            example:
+              e_sign_consent: true
+              sponge_card_terms: true
+              information_certification: true
+              unauthorized_solicitation_acknowledgement: true
+      responses:
+        '200':
+          description: Successful response.
+  /api/sponge-card/create-card:
+    post:
+      operationId: postApiSpongeCardCreateCard
+      tags:
+      - Sponge Card
+      summary: Create a Sponge Card
+      description: Create the virtual Sponge Card after onboarding is approved and consent is accepted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpongeCardRequest'
+            example:
+              billing:
+                line1: 123 Market St
+                city: San Francisco
+                region: CA
+                postal_code: '94105'
+                country_code: US
+              email: jane@example.com
+              phone: '+14155550123'
+      responses:
+        '200':
+          description: Successful response.
+  /api/sponge-card/details:
+    get:
+      operationId: getApiSpongeCardDetails
+      tags:
+      - Sponge Card
+      summary: Get Sponge Card details
+      description: Fetch encrypted PAN/CVC for the user's Sponge Card plus a one-time secret_key for local decryption. Treat this response as sensitive.
+      parameters:
+      - name: agentId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Required when not authenticating with an agent API key.
+      responses:
+        '200':
+          description: Successful response.
+  /api/sponge-card/fund:
+    post:
+      operationId: postApiSpongeCardFund
+      tags:
+      - Sponge Card
+      summary: Fund Sponge Card collateral
+      description: Top up Sponge Card collateral with USDC from the wallet.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpongeCardAmountRequest'
+            example:
+              amount: '100.00'
+              chain: base
+      responses:
+        '200':
+          description: Successful response.
+  /api/sponge-card/withdraw:
+    post:
+      operationId: postApiSpongeCardWithdraw
+      tags:
+      - Sponge Card
+      summary: Withdraw Sponge Card collateral
+      description: Withdraw Sponge Card collateral back to the wallet, reducing card spending power.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpongeCardAmountRequest'
+            example:
+              amount: '50.00'
+              chain: base
+      responses:
+        '200':
+          description: Successful response.
+components:
+  schemas:
+    SpongeCardShippingAddress:
+      allOf:
+      - $ref: '#/components/schemas/SpongeCardAddress'
+      - type: object
+        properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
+    SpongeCardTermsRequest:
+      type: object
+      required:
+      - e_sign_consent
+      - sponge_card_terms
+      - information_certification
+      - unauthorized_solicitation_acknowledgement
+      properties:
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+        e_sign_consent:
+          type: boolean
+        account_opening_privacy_notice:
+          type: boolean
+        sponge_card_terms:
+          type: boolean
+        information_certification:
+          type: boolean
+        unauthorized_solicitation_acknowledgement:
+          type: boolean
+    CreateSpongeCardRequest:
+      type: object
+      required:
+      - billing
+      - email
+      - phone
+      properties:
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+        billing:
+          $ref: '#/components/schemas/SpongeCardAddress'
+        email:
+          type: string
+        phone:
+          type: string
+        shipping:
+          $ref: '#/components/schemas/SpongeCardShippingAddress'
+    SpongeCardOnboardRequest:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+        occupation:
+          type: string
+        redirect_uri:
+          type: string
+        e_sign_consent:
+          type: boolean
+        account_opening_privacy_notice:
+          type: boolean
+        sponge_card_terms:
+          type: boolean
+        information_certification:
+          type: boolean
+        unauthorized_solicitation_acknowledgement:
+          type: boolean
+    SpongeCardAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - region
+      - postal_code
+      - country_code
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        region:
+          type: string
+        postal_code:
+          type: string
+        country_code:
+          type: string
+    SpongeCardAmountRequest:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: string
+          pattern: ^\d+(\.\d+)?$
+        chain:
+          type: string
+          description: Optional collateral chain, for example base or solana.
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key

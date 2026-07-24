@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Sponge public Agents Payments API
+  version: 1.0.0
+  description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
+servers:
+- url: https://api.wallet.paysponge.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Payments
+paths:
+  /api/x402/fetch:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                method:
+                  type: string
+                  enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+                body: {}
+            example:
+              url: https://api.example.com/premium-data
+              method: GET
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                method:
+                  type: string
+                  enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                method:
+                  type: string
+                  enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - PATCH
+                headers:
+                  type: object
+                  additionalProperties:
+                    type: string
+      operationId: postApiX402Fetch
+      tags:
+      - Payments
+      summary: Fetch with x402 auto-pay
+      description: Fetch with x402 auto-pay via POST.
+      responses:
+        '200':
+          description: Successful response.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
