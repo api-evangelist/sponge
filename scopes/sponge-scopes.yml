@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: https://api.wallet.paysponge.com/.well-known/openid-configuration
+docs: https://docs.paysponge.com/wallet/mcp.md
+description: >-
+  Sponge's Wallet API is primarily bearer API-key authenticated, but the hosted
+  MCP servers are fronted by an OAuth 2.0 / OIDC authorization server (dynamic
+  client registration, S256 PKCE) whose discovery metadata advertises the scopes
+  below. These scopes gate OAuth-connected MCP clients (e.g. Claude, ChatGPT).
+schemes:
+- name: OAuth2
+  type: oauth2
+  source: well-known/sponge-openid-configuration.json
+  issuer: https://api.wallet.paysponge.com
+  authorization_url: https://api.wallet.paysponge.com/oauth/authorize
+  token_url: https://api.wallet.paysponge.com/oauth/token
+  registration_url: https://api.wallet.paysponge.com/oauth/register
+  revocation_url: https://api.wallet.paysponge.com/oauth/revoke
+  grant_types: [authorization_code, refresh_token]
+  pkce: S256
+scopes:
+- scope: openid
+  description: OpenID Connect authentication of the connecting agent identity.
+  sources: [well-known/sponge-openid-configuration.json]
+- scope: mcp:tools
+  description: Access to the Sponge MCP tool surface for the authorized agent.
+  sources: [well-known/sponge-openid-configuration.json]
+- scope: wallet:read
+  description: Read-only access to wallet addresses, balances, and transaction history.
+  sources: [well-known/sponge-openid-configuration.json]
+- scope: wallet:transfer
+  description: Authorize outbound transfers, swaps, and payments from the agent wallet.
+  sources: [well-known/sponge-openid-configuration.json]
+- scope: sponge:all
+  description: Full access to all Sponge wallet capabilities for the authorized agent.
+  sources: [well-known/sponge-openid-configuration.json]

@@ -1,0 +1,46 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.paysponge.com/llms.txt
+derived_from: openapi/sponge-openapi-original.json
+description: >-
+  Cross-cutting standards Sponge's public API conforms to, derived from the
+  OpenAPI spec and the published docs/skill. Sponge is notable for implementing
+  emerging agent-payment standards (x402, MPP) alongside conventional web
+  identity standards.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi/sponge-openapi-original.json declares openapi 3.0.3
+- id: oauth2
+  conforms: true
+  evidence: >-
+    OAuth 2.0 authorization server metadata at
+    /.well-known/oauth-authorization-server (authorization_code + refresh_token).
+- id: oidc
+  conforms: true
+  evidence: OpenID Connect discovery at /.well-known/openid-configuration.
+- id: oauth-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256].
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint advertised in OAuth server metadata.
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: /.well-known/api-catalog linkset published on docs.paysponge.com.
+- id: eip-4361-siwe
+  conforms: true
+  evidence: POST /api/siwe/generate and `spongewallet auth siwe` for EIP-4361 signatures.
+- id: x402-payments
+  conforms: true
+  evidence: POST /api/x402/fetch; x402 USDC payment protocol for paid endpoints.
+- id: mpp-payments
+  conforms: true
+  evidence: POST /api/mpp/fetch and MPP session endpoints (Tempo).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No application/problem+json responses documented in the OpenAPI spec.
+- id: rfc8594-sunset-header
+  conforms: false
+- id: fapi
+  conforms: false

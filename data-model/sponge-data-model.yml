@@ -1,0 +1,72 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sponge-openapi-original.json
+description: >-
+  Entity-relationship model derived from the Sponge public OpenAPI paths, tags,
+  and request schemas. The Agent is the root identity that owns every other
+  object; most write operations reference their owning agent via an `agentId`
+  field or path parameter.
+entities:
+- name: Agent
+  description: Runtime identity that owns wallets, keys, tools, and spending limits.
+  operations: [postApiAgents, getApiAgents, getApiAgentsById, putApiAgentsById, deleteApiAgentsById, getApiAgentsMe]
+- name: AgentKey
+  description: API key scoped to a single agent.
+  operations: [getApiAgentsByIdApi-key, postApiAgentsByIdRegenerate-key, postApiAgentKeys, getApiAgentKeys, deleteApiAgentKeys, getApiAgentKeysValue]
+- name: Wallet
+  description: Multi-chain crypto wallet (Solana/Base/Ethereum/Polygon/Arbitrum/Tempo) owned by an agent.
+  operations: [getApiWallets, getApiWalletsById, getApiWalletsByIdBalance, getApiBalances]
+- name: Transfer
+  description: Outbound EVM or Solana value transfer.
+  operations: [postApiTransfersEvm, postApiTransfersSolana]
+- name: Transaction
+  description: Swaps, bridges, and on-chain transaction status/history.
+  operations: [getApiTransactionsHistory, getApiTransactionsStatusByTxHash, postApiTransactionsSwap, postApiTransactionsBase-swap, postApiTransactionsBridge]
+- name: Card
+  description: Payment cards — stored credit cards, issued virtual cards, and agent-owned Sponge Card.
+  operations: [postApiCreditCards, getApiCreditCards, postApiCards, postApiVirtualCards, postApiCardUsage, getApiSpongeCardStatus, postApiSpongeCardOnboard, postApiSpongeCardCreateCard, getApiSpongeCardDetails, postApiSpongeCardFund, postApiSpongeCardWithdraw]
+- name: Payment
+  description: Paid external-service calls via x402 or MPP, plus MPP sessions.
+  operations: [postApiX402Fetch, postApiMppFetch, postApiMppSessionStart, postApiMppSessionRequest, postApiMppSessionClose, getApiMppSessions]
+- name: OnrampSession
+  description: Fiat/crypto onramp sessions (Coinbase, Stripe, crypto).
+  operations: [postApiOnrampCrypto, postApiCoinbase-onrampUrl, getApiCoinbase-onrampStatus, postApiStripe-onrampSession, getApiStripe-onrampStatus]
+- name: Trade
+  description: Hyperliquid perpetuals and Polymarket orders.
+  operations: [postApiHyperliquid]
+relationships:
+- from: AgentKey
+  to: Agent
+  type: belongs_to
+  via: agentId
+- from: Wallet
+  to: Agent
+  type: belongs_to
+  via: agentId
+- from: Agent
+  to: Wallet
+  type: has_many
+- from: Card
+  to: Agent
+  type: belongs_to
+  via: agentId
+- from: Agent
+  to: Card
+  type: has_many
+- from: Transfer
+  to: Wallet
+  type: belongs_to
+  via: chain/address
+- from: OnrampSession
+  to: Agent
+  type: belongs_to
+  via: agentId
+- from: Payment
+  to: Agent
+  type: belongs_to
+  via: agentId
+id_fields:
+  agentId: reference to the owning Agent (present on card, key, onramp, and card-usage requests)
+  linkPaymentMethodId: reference to a linked payment method
+  spendRequestId: reference to a spend/approval request
+  txHash: on-chain transaction hash

@@ -1,0 +1,57 @@
+# Sponge
+
+> Sponge is an SDK-first wallet and payments platform for AI agents. Prefer the TypeScript `@paysponge/sdk` or Python `paysponge` SDK docs for application integrations; use the OpenAPI spec when building a custom client or checking wire-level schemas.
+
+## Start with the SDK
+
+- [SDK](https://docs.paysponge.com/wallet/sdk.md): Install the TypeScript or Python SDK, connect an agent wallet with `SpongeWallet`, and create/manage agents with `SpongePlatform`.
+- [SDK reference](https://docs.paysponge.com/wallet/sdk-reference.md): Public API reference for `@paysponge/sdk` and `paysponge`, organized by client and workflow.
+- [Wallet SDK](https://docs.paysponge.com/wallet/sdk-wallet.md): `SpongeWallet` methods for agent-scoped wallet operations such as addresses, balances, transfers, swaps, and transaction history.
+- [Platform SDK](https://docs.paysponge.com/wallet/sdk-platform.md): `SpongePlatform` methods for master-key backends that create agents, manage keys, configure spending limits, and handle banking workflows.
+- [Payments and cards SDK](https://docs.paysponge.com/wallet/sdk-payments-cards.md): SDK methods for paid requests, x402, MPP, stored cards, Link, virtual cards, and Sponge Card.
+- [SDK tools and helpers](https://docs.paysponge.com/wallet/sdk-tools-helpers.md): MCP helpers, direct tool wrappers, trading helpers, approvals, `HttpClient`, and `PublicToolsApi`.
+- [TypeScript examples](https://docs.paysponge.com/wallet/typescript-examples.md): Copy-paste TypeScript examples for common `SpongeWallet` and `SpongePlatform` flows.
+- [Python examples](https://docs.paysponge.com/wallet/python-examples.md): Copy-paste Python examples for the `paysponge` SDK.
+
+## Agent Frameworks
+
+- [MCP](https://docs.paysponge.com/wallet/mcp.md): Connect Sponge wallet tools to an agent framework through MCP.
+- [Claude Agent SDK](https://docs.paysponge.com/wallet/claude-agent-sdk.md): Give Claude Agent SDK Sponge wallet tools through MCP.
+- [Vercel AI SDK](https://docs.paysponge.com/wallet/vercel-ai-sdk.md): Wrap Sponge wallet calls as Vercel AI SDK tools.
+- [OpenAI Agents SDK](https://docs.paysponge.com/wallet/openai-agents-sdk.md): Use OpenAI Agents SDK function tools around `SpongeWallet`.
+- [Agents](https://docs.paysponge.com/wallet/ai-agents.md): Authenticate as one agent with device flow or an agent API key.
+- [CLI](https://docs.paysponge.com/wallet/cli.md): Initialize agents, claim or log in, and use curated wallet commands from the terminal.
+
+## Wallet Workflows
+
+- [Wallets](https://docs.paysponge.com/wallet/wallets-and-transfers.md): Choose the wallet workflow you need.
+- [Addresses and balances](https://docs.paysponge.com/wallet/wallet-addresses-balances.md): Read wallet addresses and balances across supported networks.
+- [Transfers](https://docs.paysponge.com/wallet/wallet-transfers.md): Send funds from a Sponge wallet.
+- [Swaps](https://docs.paysponge.com/wallet/wallet-swaps.md): Discover Solana tokens and swap through the wallet.
+- [Transaction history](https://docs.paysponge.com/wallet/wallet-history.md): Check transaction status and list wallet activity.
+- [Onramp](https://docs.paysponge.com/wallet/wallet-onramp.md): Create hosted onramp links for funding a wallet.
+
+## Payments, Cards, Banking, and Trading
+
+- [Make x402 payments](https://docs.paysponge.com/wallet/x402-payments.md): Pay x402 endpoints from an agent wallet.
+- [Make MPP payments](https://docs.paysponge.com/wallet/mpp-payments.md): Pay MPP endpoints from an agent wallet.
+- [Accept payments via payment links](https://docs.paysponge.com/wallet/payment-links.md): Create single-use payment links so another agent or user can pay you.
+- [Cards](https://docs.paysponge.com/wallet/cards.md): Choose the card workflow you need.
+- [Sponge Card](https://docs.paysponge.com/wallet/sponge-card.md): Create, fund, and manage an agent-owned Sponge Card.
+- [Use your own card](https://docs.paysponge.com/wallet/user-cards.md): Add a user-owned card or linked payment method.
+- [Bank accounts](https://docs.paysponge.com/wallet/bank-accounts.md): Choose the banking workflow you need.
+- [Virtual bank accounts](https://docs.paysponge.com/wallet/virtual-bank-accounts.md): Create a virtual USD account for wallet-linked deposits.
+- [Bank withdrawals](https://docs.paysponge.com/wallet/bank-withdrawals.md): Link an external bank account and withdraw via ACH.
+- [Hyperliquid](https://docs.paysponge.com/wallet/hyperliquid.md): Fund Hyperliquid and trade perpetuals from a Sponge wallet.
+- [Polymarket](https://docs.paysponge.com/wallet/polymarket.md): Search Polymarket markets and place orders from an agent wallet.
+
+## Gateway
+
+- [Gateway overview](https://docs.paysponge.com/gateway/index.md): Turn any API into paid endpoints, priced, metered, and payable by agents.
+- [Gateway quickstart](https://docs.paysponge.com/gateway/quickstart.md): Create a service, price an endpoint, and inspect a real 402 response.
+- [Gateway concepts](https://docs.paysponge.com/gateway/concepts.md): Understand services, endpoints, pricing, resources, and session flows.
+- [Gateway MCP](https://docs.paysponge.com/gateway/mcp.md): Use the Sponge Gateway MCP server to discover specs and create paid gateway services.
+
+## API Reference
+
+- [Public OpenAPI spec](https://docs.paysponge.com/api-reference/public-openapi.json): REST schema for custom clients and wire-level integration work.

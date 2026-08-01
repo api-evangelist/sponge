@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+description: >-
+  Well-known discovery documents found across Sponge hosts. The Wallet API host
+  exposes full OAuth 2.0 / OIDC authorization-server metadata (backing the MCP
+  OAuth flow); the Gateway API host exposes its own OAuth server metadata; the
+  docs host publishes an RFC 9727 api-catalog linkset pointing at the OpenAPI spec.
+documents:
+- host: https://api.wallet.paysponge.com
+  path: /.well-known/openid-configuration
+  status: 200
+  file: sponge-openid-configuration.json
+- host: https://api.wallet.paysponge.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  file: sponge-oauth-authorization-server.json
+- host: https://api.paysponge.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  file: sponge-gateway-oauth-authorization-server.json
+- host: https://docs.paysponge.com
+  path: /.well-known/api-catalog
+  status: 200
+  file: sponge-api-catalog.json
+- host: https://api.wallet.paysponge.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://paysponge.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://api.wallet.paysponge.com
+  path: /.well-known/ai-plugin.json
+  status: 404

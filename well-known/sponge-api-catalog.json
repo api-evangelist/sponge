@@ -1,0 +1,17 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://docs.paysponge.com/",
+      "service-desc": [
+        {
+          "href": "https://mintlify-s3-bucket-3cc1a52.s3.us-east-1.amazonaws.com/32c2acfd-8ca8-4031-9e3a-874d50a5e93a?<redacted-presigned-query>",
+          "type": "application/vnd.oai.openapi+json"
+        },
+        {
+          "href": "https://mintlify-s3-bucket-3cc1a52.s3.us-east-1.amazonaws.com/8185d884-3cd9-465e-aac3-9e606512c174?<redacted-presigned-query>",
+          "type": "application/vnd.oai.openapi+json"
+        }
+      ]
+    }
+  ]
+}

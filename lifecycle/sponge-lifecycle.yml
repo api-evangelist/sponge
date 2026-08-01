@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://sponge.md
+description: >-
+  Versioning and lifecycle posture for the Sponge public API. Sponge pins the API
+  via a required Sponge-Version request header rather than a URI version segment.
+  No public status page, deprecation policy, or SLA page was found at capture time.
+versioning:
+  scheme: request-header
+  header: Sponge-Version
+  required: true
+  current: 0.2.2
+  spec_version: 1.0.0
+  docs: https://docs.paysponge.com/wallet/sdk.md
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No deprecation/Sunset (RFC 8594) policy documented at capture time.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+notes: >-
+  status.paysponge.com did not resolve and no /changelog page was found on the
+  docs host as of 2026-07-21; only versioning is captured. No StatusPage or
+  Deprecation canonical pointer is emitted (nothing to point at).

@@ -1,0 +1,35 @@
+arazzo: 1.0.1
+info:
+  title: Sponge — create an agent and issue its key
+  version: 1.0.0
+  summary: Platform backend creates a new agent, then mints an agent API key for runtime use.
+sourceDescriptions:
+- name: sponge
+  url: ../openapi/sponge-openapi-original.json
+  type: openapi
+workflows:
+- workflowId: createAgentAndKey
+  summary: Create an agent with a master/platform key, then generate an agent-scoped API key.
+  inputs:
+    type: object
+    properties:
+      name: { type: string }
+  steps:
+  - stepId: createAgent
+    operationId: postApiAgents
+    requestBody:
+      payload:
+        name: $inputs.name
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      agentId: $response.body#/id
+  - stepId: issueKey
+    operationId: postApiAgentKeys
+    requestBody:
+      payload:
+        agentId: $steps.createAgent.outputs.agentId
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    agentId: $steps.createAgent.outputs.agentId

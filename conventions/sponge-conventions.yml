@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+source: https://sponge.md
+derived_from: openapi/sponge-openapi-original.json
+description: Cross-cutting request/response conventions for the Sponge public Wallet API.
+base_url: https://api.wallet.paysponge.com
+authentication:
+  style: bearer
+  header: 'Authorization: Bearer <SPONGE_API_KEY>'
+  key_prefixes: [sponge_live_, sponge_test_]
+  notes: >-
+    One agent key is scoped to one agent. OAuth 2.0 (S256 PKCE) is also available
+    for MCP connectors. See authentication/sponge-authentication.yml and
+    scopes/sponge-scopes.yml.
+versioning:
+  style: request-header
+  header: Sponge-Version
+  required: true
+  current: 0.2.2
+  notes: 'The Sponge-Version header is REQUIRED on every request (skill reference v0.2.2).'
+pagination:
+  style: limit
+  params: [limit]
+  notes: >-
+    List endpoints (e.g. GET /api/transactions/history, GET /api/solana/tokens/search)
+    accept a `limit` query parameter. No documented cursor/offset envelope.
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key header or parameter is documented for write/payment
+    operations as of this capture. Not asserting an Idempotency contract.
+error_envelope:
+  documented: false
+  notes: >-
+    The public OpenAPI documents only 200/204 success responses; no structured
+    error catalog or application/problem+json schema is published. Errors are
+    returned as HTTP status codes without a captured envelope schema.
+rate_limiting:
+  documented: false
+payments:
+  protocols: [x402, MPP]
+  notes: >-
+    Paid external-service calls use x402 (USDC) or MPP (Tempo, asset negotiated).
+    Discovery is a 3-step flow: GET /api/discover -> GET /api/discover/:serviceId
+    -> POST /api/paid/fetch (auto-selects x402 or MPP).
+cross_links:
+  authentication: authentication/sponge-authentication.yml
+  scopes: scopes/sponge-scopes.yml
+  conformance: conformance/sponge-conformance.yml
+  lifecycle: lifecycle/sponge-lifecycle.yml

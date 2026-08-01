@@ -1,0 +1,44 @@
+arazzo: 1.0.1
+info:
+  title: Sponge — check balance, transfer, and confirm
+  version: 1.0.0
+  summary: Read wallet balances, send an EVM transfer, then poll transaction status.
+sourceDescriptions:
+- name: sponge
+  url: ../openapi/sponge-openapi-original.json
+  type: openapi
+workflows:
+- workflowId: transferAndConfirm
+  summary: Check balances, transfer value on an EVM chain, and confirm the transaction landed.
+  inputs:
+    type: object
+    properties:
+      to: { type: string }
+      amount: { type: string }
+      chain: { type: string }
+  steps:
+  - stepId: checkBalances
+    operationId: getApiBalances
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: sendTransfer
+    operationId: postApiTransfersEvm
+    requestBody:
+      payload:
+        to: $inputs.to
+        amount: $inputs.amount
+        chain: $inputs.chain
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      txHash: $response.body#/txHash
+  - stepId: confirmStatus
+    operationId: getApiTransactionsStatusByTxHash
+    parameters:
+    - name: txHash
+      in: path
+      value: $steps.sendTransfer.outputs.txHash
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    txHash: $steps.sendTransfer.outputs.txHash

@@ -1,0 +1,3696 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Sponge public API",
+    "version": "1.0.0",
+    "description": "Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps."
+  },
+  "servers": [
+    {
+      "url": "https://api.wallet.paysponge.com",
+      "description": "Production"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "CardBillingAddress": {
+        "type": "object",
+        "required": [
+          "line1",
+          "city",
+          "state",
+          "postal_code",
+          "country"
+        ],
+        "properties": {
+          "line1": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "CardShippingAddress": {
+        "type": "object",
+        "required": [
+          "line1",
+          "city",
+          "state",
+          "postal_code",
+          "country",
+          "phone"
+        ],
+        "properties": {
+          "line1": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      },
+      "StoreCreditCardRequest": {
+        "type": "object",
+        "required": [
+          "card_number",
+          "cvc",
+          "cardholder_name",
+          "email",
+          "billing_address",
+          "shipping_address"
+        ],
+        "properties": {
+          "card_number": {
+            "type": "string",
+            "description": "Card number."
+          },
+          "expiry_month": {
+            "type": "string",
+            "description": "Expiry month, used with expiry_year."
+          },
+          "expiry_year": {
+            "type": "string",
+            "description": "Expiry year, used with expiry_month."
+          },
+          "expiration": {
+            "type": "string",
+            "description": "Expiration in MM/YYYY format."
+          },
+          "cvc": {
+            "type": "string",
+            "description": "Card verification code."
+          },
+          "cardholder_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "billing_address": {
+            "$ref": "#/components/schemas/CardBillingAddress"
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/CardShippingAddress"
+          },
+          "label": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          }
+        }
+      },
+      "LinkAddress": {
+        "type": "object",
+        "required": [
+          "name",
+          "line1",
+          "city",
+          "state",
+          "postalCode",
+          "country"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "line1": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "LinkPaymentMethodRequest": {
+        "type": "object",
+        "properties": {
+          "linkPaymentMethodId": {
+            "type": "string",
+            "description": "Link payment method ID. Required when multiple methods are available."
+          },
+          "setAsDefault": {
+            "type": "boolean"
+          },
+          "clientName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "description": "Required when saving the method."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Required when saving the method."
+          },
+          "billing": {
+            "$ref": "#/components/schemas/LinkAddress"
+          },
+          "shipping": {
+            "$ref": "#/components/schemas/LinkAddress"
+          }
+        }
+      },
+      "LinkPaymentCredentialRequest": {
+        "type": "object",
+        "properties": {
+          "linkPaymentMethodId": {
+            "type": "string",
+            "description": "Saved Sponge or Link payment method ID."
+          },
+          "spendRequestId": {
+            "type": "string",
+            "description": "Spend request ID returned by a previous approval_required response."
+          },
+          "amount": {
+            "type": "string",
+            "description": "Purchase amount, for example 49.99."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code. Defaults to USD."
+          },
+          "merchantName": {
+            "type": "string"
+          },
+          "merchantUrl": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCardRequest": {
+        "type": "object",
+        "properties": {
+          "card_type": {
+            "type": "string",
+            "enum": [
+              "sponge_card",
+              "basis_theory_vaulted"
+            ]
+          },
+          "payment_method_id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "merchant_name": {
+            "type": "string"
+          },
+          "merchant_url": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          }
+        }
+      },
+      "ProductLineItem": {
+        "type": "object",
+        "required": [
+          "name",
+          "price",
+          "quantity"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          }
+        }
+      },
+      "VirtualCardShippingAddress": {
+        "type": "object",
+        "required": [
+          "line1",
+          "city",
+          "state",
+          "postal_code",
+          "country_code"
+        ],
+        "properties": {
+          "line1": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          }
+        }
+      },
+      "IssueVirtualCardRequest": {
+        "type": "object",
+        "required": [
+          "amount",
+          "merchant_name",
+          "merchant_url"
+        ],
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code. Defaults to USD."
+          },
+          "merchant_name": {
+            "type": "string"
+          },
+          "merchant_url": {
+            "type": "string"
+          },
+          "merchant_country_code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductLineItem"
+            }
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/VirtualCardShippingAddress"
+          },
+          "enrollment_id": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          }
+        }
+      },
+      "ReportCardUsageRequest": {
+        "type": "object",
+        "required": [
+          "payment_method_id",
+          "status"
+        ],
+        "properties": {
+          "payment_method_id": {
+            "type": "string"
+          },
+          "merchant_name": {
+            "type": "string"
+          },
+          "merchant_domain": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success",
+              "failed",
+              "cancelled"
+            ]
+          },
+          "failure_reason": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          }
+        }
+      },
+      "SpongeCardOnboardRequest": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          },
+          "occupation": {
+            "type": "string"
+          },
+          "redirect_uri": {
+            "type": "string"
+          },
+          "e_sign_consent": {
+            "type": "boolean"
+          },
+          "account_opening_privacy_notice": {
+            "type": "boolean"
+          },
+          "sponge_card_terms": {
+            "type": "boolean"
+          },
+          "information_certification": {
+            "type": "boolean"
+          },
+          "unauthorized_solicitation_acknowledgement": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SpongeCardTermsRequest": {
+        "type": "object",
+        "required": [
+          "e_sign_consent",
+          "sponge_card_terms",
+          "information_certification",
+          "unauthorized_solicitation_acknowledgement"
+        ],
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          },
+          "e_sign_consent": {
+            "type": "boolean"
+          },
+          "account_opening_privacy_notice": {
+            "type": "boolean"
+          },
+          "sponge_card_terms": {
+            "type": "boolean"
+          },
+          "information_certification": {
+            "type": "boolean"
+          },
+          "unauthorized_solicitation_acknowledgement": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SpongeCardAddress": {
+        "type": "object",
+        "required": [
+          "line1",
+          "city",
+          "region",
+          "postal_code",
+          "country_code"
+        ],
+        "properties": {
+          "line1": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          }
+        }
+      },
+      "SpongeCardShippingAddress": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SpongeCardAddress"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "CreateSpongeCardRequest": {
+        "type": "object",
+        "required": [
+          "billing",
+          "email",
+          "phone"
+        ],
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          },
+          "billing": {
+            "$ref": "#/components/schemas/SpongeCardAddress"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "shipping": {
+            "$ref": "#/components/schemas/SpongeCardShippingAddress"
+          }
+        }
+      },
+      "SpongeCardAmountRequest": {
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "properties": {
+          "amount": {
+            "type": "string",
+            "pattern": "^\\d+(\\.\\d+)?$"
+          },
+          "chain": {
+            "type": "string",
+            "description": "Optional collateral chain, for example base or solana."
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          }
+        }
+      },
+      "AgentKeyRequest": {
+        "type": "object",
+        "required": [
+          "service",
+          "key"
+        ],
+        "properties": {
+          "service": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "agentId": {
+            "type": "string",
+            "description": "Required when not authenticating with an agent API key."
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Key"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/agents/me": {
+      "get": {
+        "operationId": "getApiAgentsMe",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get current agent",
+        "description": "Get current agent via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/agents/": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "agentType": {
+                    "type": "string"
+                  },
+                  "dailySpendingLimit": {
+                    "type": "string"
+                  },
+                  "weeklySpendingLimit": {
+                    "type": "string"
+                  },
+                  "monthlySpendingLimit": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "agentType": {
+                    "type": "string"
+                  },
+                  "dailySpendingLimit": {
+                    "type": "string"
+                  },
+                  "weeklySpendingLimit": {
+                    "type": "string"
+                  },
+                  "monthlySpendingLimit": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "agentType": {
+                    "type": "string"
+                  },
+                  "dailySpendingLimit": {
+                    "type": "string"
+                  },
+                  "weeklySpendingLimit": {
+                    "type": "string"
+                  },
+                  "monthlySpendingLimit": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiAgents",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "List or create agents",
+        "description": "List or create agents via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "name": "includeBalances",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiAgents",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "List or create agents",
+        "description": "List or create agents via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/agents/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeBalances",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiAgentsById",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get, update, or delete an agent",
+        "description": "Get, update, or delete an agent via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "agentType": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "dailySpendingLimit": {
+                    "type": "string"
+                  },
+                  "weeklySpendingLimit": {
+                    "type": "string"
+                  },
+                  "monthlySpendingLimit": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "agentType": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "dailySpendingLimit": {
+                    "type": "string"
+                  },
+                  "weeklySpendingLimit": {
+                    "type": "string"
+                  },
+                  "monthlySpendingLimit": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "agentType": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "dailySpendingLimit": {
+                    "type": "string"
+                  },
+                  "weeklySpendingLimit": {
+                    "type": "string"
+                  },
+                  "monthlySpendingLimit": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putApiAgentsById",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get, update, or delete an agent",
+        "description": "Get, update, or delete an agent via PUT.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "deleteApiAgentsById",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get, update, or delete an agent",
+        "description": "Get, update, or delete an agent via DELETE.",
+        "responses": {
+          "204": {
+            "description": "Successful response with no content."
+          }
+        }
+      }
+    },
+    "/api/agents/{id}/api-key": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiAgentsByIdApi-key",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get agent API key metadata",
+        "description": "Get agent API key metadata via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/agents/{id}/regenerate-key": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "operationId": "postApiAgentsByIdRegenerate-key",
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Regenerate an agent API key",
+        "description": "Regenerate an agent API key via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/balances": {
+      "get": {
+        "parameters": [
+          {
+            "name": "chain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "allowedChains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyUsdc",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiBalances",
+        "tags": [
+          "Wallet"
+        ],
+        "summary": "Get detailed balances",
+        "description": "Get detailed balances via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/wallets/": {
+      "get": {
+        "parameters": [
+          {
+            "name": "includeBalances",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiWallets",
+        "tags": [
+          "Wallet"
+        ],
+        "summary": "List wallets",
+        "description": "List wallets via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/wallets/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiWalletsById",
+        "tags": [
+          "Wallet"
+        ],
+        "summary": "Get wallet details",
+        "description": "Get wallet details via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/wallets/{id}/balance": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiWalletsByIdBalance",
+        "tags": [
+          "Wallet"
+        ],
+        "summary": "Get wallet balance",
+        "description": "Get wallet balance via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transfers/evm": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "to",
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "ETH",
+                      "USDC"
+                    ]
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "to",
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "ETH",
+                      "USDC"
+                    ]
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "to",
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "ETH",
+                      "USDC"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiTransfersEvm",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Send an EVM transfer",
+        "description": "Send an EVM transfer via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transfers/solana": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "to",
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "SOL",
+                      "USDC"
+                    ]
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "to",
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "SOL",
+                      "USDC"
+                    ]
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "to",
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "SOL",
+                      "USDC"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiTransfersSolana",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Send a Solana transfer",
+        "description": "Send a Solana transfer via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/solana/tokens": {
+      "get": {
+        "parameters": [
+          {
+            "name": "chain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiSolanaTokens",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "List Solana wallet tokens",
+        "description": "List Solana wallet tokens via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/solana/tokens/search": {
+      "get": {
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiSolanaTokensSearch",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Search Solana tokens",
+        "description": "Search Solana tokens via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transactions/history": {
+      "get": {
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiTransactionsHistory",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Get transaction history",
+        "description": "Get transaction history via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transactions/status/{txHash}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "txHash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiTransactionsStatusByTxHash",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Get transaction status",
+        "description": "Get transaction status via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transactions/swap": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "inputToken",
+                  "outputToken",
+                  "amount"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "inputToken": {
+                    "type": "string"
+                  },
+                  "outputToken": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "slippageBps": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "inputToken",
+                  "outputToken",
+                  "amount"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "inputToken": {
+                    "type": "string"
+                  },
+                  "outputToken": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "slippageBps": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "inputToken",
+                  "outputToken",
+                  "amount"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "inputToken": {
+                    "type": "string"
+                  },
+                  "outputToken": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "slippageBps": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiTransactionsSwap",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Swap on Solana",
+        "description": "Swap on Solana via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transactions/base-swap": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "inputToken",
+                  "outputToken",
+                  "amount"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "inputToken": {
+                    "type": "string"
+                  },
+                  "outputToken": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "slippageBps": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "inputToken",
+                  "outputToken",
+                  "amount"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "inputToken": {
+                    "type": "string"
+                  },
+                  "outputToken": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "slippageBps": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "chain",
+                  "inputToken",
+                  "outputToken",
+                  "amount"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string"
+                  },
+                  "inputToken": {
+                    "type": "string"
+                  },
+                  "outputToken": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "slippageBps": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiTransactionsBase-swap",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Swap on Base",
+        "description": "Swap on Base via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/transactions/bridge": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "sourceChain",
+                  "destinationChain",
+                  "token",
+                  "amount"
+                ],
+                "properties": {
+                  "sourceChain": {
+                    "type": "string",
+                    "enum": [
+                      "ethereum",
+                      "base",
+                      "polygon",
+                      "arbitrum-one",
+                      "hyperliquid",
+                      "solana"
+                    ]
+                  },
+                  "destinationChain": {
+                    "type": "string",
+                    "enum": [
+                      "ethereum",
+                      "base",
+                      "polygon",
+                      "arbitrum-one",
+                      "hyperliquid",
+                      "solana"
+                    ]
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "destinationToken": {
+                    "type": "string"
+                  },
+                  "recipientAddress": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "sourceChain",
+                  "destinationChain",
+                  "token",
+                  "amount"
+                ],
+                "properties": {
+                  "sourceChain": {
+                    "type": "string",
+                    "enum": [
+                      "ethereum",
+                      "base",
+                      "polygon",
+                      "arbitrum-one",
+                      "hyperliquid",
+                      "solana"
+                    ]
+                  },
+                  "destinationChain": {
+                    "type": "string",
+                    "enum": [
+                      "ethereum",
+                      "base",
+                      "polygon",
+                      "arbitrum-one",
+                      "hyperliquid",
+                      "solana"
+                    ]
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "destinationToken": {
+                    "type": "string"
+                  },
+                  "recipientAddress": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "sourceChain",
+                  "destinationChain",
+                  "token",
+                  "amount"
+                ],
+                "properties": {
+                  "sourceChain": {
+                    "type": "string",
+                    "enum": [
+                      "ethereum",
+                      "base",
+                      "polygon",
+                      "arbitrum-one",
+                      "hyperliquid",
+                      "solana"
+                    ]
+                  },
+                  "destinationChain": {
+                    "type": "string",
+                    "enum": [
+                      "ethereum",
+                      "base",
+                      "polygon",
+                      "arbitrum-one",
+                      "hyperliquid",
+                      "solana"
+                    ]
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "destinationToken": {
+                    "type": "string"
+                  },
+                  "recipientAddress": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiTransactionsBridge",
+        "tags": [
+          "Transfers"
+        ],
+        "summary": "Bridge across chains",
+        "description": "Bridge across chains via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/x402/fetch": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "GET",
+                      "POST",
+                      "PUT",
+                      "DELETE",
+                      "PATCH"
+                    ]
+                  },
+                  "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "body": {}
+                }
+              },
+              "example": {
+                "url": "https://api.example.com/premium-data",
+                "method": "GET"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "GET",
+                      "POST",
+                      "PUT",
+                      "DELETE",
+                      "PATCH"
+                    ]
+                  },
+                  "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "GET",
+                      "POST",
+                      "PUT",
+                      "DELETE",
+                      "PATCH"
+                    ]
+                  },
+                  "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiX402Fetch",
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Fetch with x402 auto-pay",
+        "description": "Fetch with x402 auto-pay via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/hyperliquid": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "action"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "status",
+                      "order",
+                      "cancel",
+                      "cancel_all",
+                      "set_leverage",
+                      "positions",
+                      "orders",
+                      "fills",
+                      "markets",
+                      "ticker",
+                      "orderbook",
+                      "funding",
+                      "withdraw",
+                      "transfer",
+                      "set_abstraction"
+                    ]
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "side": {
+                    "type": "string",
+                    "enum": [
+                      "buy",
+                      "sell"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "limit",
+                      "market"
+                    ]
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string"
+                  },
+                  "reduce_only": {
+                    "type": "boolean"
+                  },
+                  "trigger_price": {
+                    "type": "string"
+                  },
+                  "tp_sl": {
+                    "type": "string",
+                    "enum": [
+                      "tp",
+                      "sl"
+                    ]
+                  },
+                  "tif": {
+                    "type": "string",
+                    "enum": [
+                      "GTC",
+                      "IOC",
+                      "PO"
+                    ]
+                  },
+                  "order_id": {
+                    "type": "string"
+                  },
+                  "leverage": {
+                    "type": "number"
+                  },
+                  "since": {
+                    "type": "number"
+                  },
+                  "limit": {
+                    "type": "number"
+                  },
+                  "offset": {
+                    "type": "number"
+                  },
+                  "query": {
+                    "type": "string"
+                  },
+                  "market_type": {
+                    "type": "string",
+                    "enum": [
+                      "spot",
+                      "swap"
+                    ]
+                  },
+                  "full": {
+                    "type": "boolean"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "to_perp": {
+                    "type": "boolean"
+                  },
+                  "abstraction": {
+                    "type": "string",
+                    "enum": [
+                      "disabled",
+                      "unifiedAccount",
+                      "portfolioMargin"
+                    ]
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "action"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "status",
+                      "order",
+                      "cancel",
+                      "cancel_all",
+                      "set_leverage",
+                      "positions",
+                      "orders",
+                      "fills",
+                      "markets",
+                      "ticker",
+                      "orderbook",
+                      "funding",
+                      "withdraw",
+                      "transfer",
+                      "set_abstraction"
+                    ]
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "side": {
+                    "type": "string",
+                    "enum": [
+                      "buy",
+                      "sell"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "limit",
+                      "market"
+                    ]
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string"
+                  },
+                  "reduce_only": {
+                    "type": "boolean"
+                  },
+                  "trigger_price": {
+                    "type": "string"
+                  },
+                  "tp_sl": {
+                    "type": "string",
+                    "enum": [
+                      "tp",
+                      "sl"
+                    ]
+                  },
+                  "tif": {
+                    "type": "string",
+                    "enum": [
+                      "GTC",
+                      "IOC",
+                      "PO"
+                    ]
+                  },
+                  "order_id": {
+                    "type": "string"
+                  },
+                  "leverage": {
+                    "type": "number"
+                  },
+                  "since": {
+                    "type": "number"
+                  },
+                  "limit": {
+                    "type": "number"
+                  },
+                  "offset": {
+                    "type": "number"
+                  },
+                  "query": {
+                    "type": "string"
+                  },
+                  "market_type": {
+                    "type": "string",
+                    "enum": [
+                      "spot",
+                      "swap"
+                    ]
+                  },
+                  "full": {
+                    "type": "boolean"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "to_perp": {
+                    "type": "boolean"
+                  },
+                  "abstraction": {
+                    "type": "string",
+                    "enum": [
+                      "disabled",
+                      "unifiedAccount",
+                      "portfolioMargin"
+                    ]
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "action"
+                ],
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "status",
+                      "order",
+                      "cancel",
+                      "cancel_all",
+                      "set_leverage",
+                      "positions",
+                      "orders",
+                      "fills",
+                      "markets",
+                      "ticker",
+                      "orderbook",
+                      "funding",
+                      "withdraw",
+                      "transfer",
+                      "set_abstraction"
+                    ]
+                  },
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "side": {
+                    "type": "string",
+                    "enum": [
+                      "buy",
+                      "sell"
+                    ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "limit",
+                      "market"
+                    ]
+                  },
+                  "amount": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string"
+                  },
+                  "reduce_only": {
+                    "type": "boolean"
+                  },
+                  "trigger_price": {
+                    "type": "string"
+                  },
+                  "tp_sl": {
+                    "type": "string",
+                    "enum": [
+                      "tp",
+                      "sl"
+                    ]
+                  },
+                  "tif": {
+                    "type": "string",
+                    "enum": [
+                      "GTC",
+                      "IOC",
+                      "PO"
+                    ]
+                  },
+                  "order_id": {
+                    "type": "string"
+                  },
+                  "leverage": {
+                    "type": "number"
+                  },
+                  "since": {
+                    "type": "number"
+                  },
+                  "limit": {
+                    "type": "number"
+                  },
+                  "offset": {
+                    "type": "number"
+                  },
+                  "query": {
+                    "type": "string"
+                  },
+                  "market_type": {
+                    "type": "string",
+                    "enum": [
+                      "spot",
+                      "swap"
+                    ]
+                  },
+                  "full": {
+                    "type": "boolean"
+                  },
+                  "destination": {
+                    "type": "string"
+                  },
+                  "to_perp": {
+                    "type": "boolean"
+                  },
+                  "abstraction": {
+                    "type": "string",
+                    "enum": [
+                      "disabled",
+                      "unifiedAccount",
+                      "portfolioMargin"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiHyperliquid",
+        "tags": [
+          "Trading"
+        ],
+        "summary": "Trade on Hyperliquid",
+        "description": "Trade on Hyperliquid via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/onramp/crypto": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "wallet_address"
+                ],
+                "properties": {
+                  "wallet_address": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "stripe",
+                      "coinbase"
+                    ]
+                  },
+                  "chain": {
+                    "type": "string",
+                    "enum": [
+                      "base",
+                      "solana",
+                      "polygon"
+                    ]
+                  },
+                  "fiat_amount": {
+                    "type": "string"
+                  },
+                  "fiat_currency": {
+                    "type": "string"
+                  },
+                  "lock_wallet_address": {
+                    "type": "boolean"
+                  },
+                  "redirect_url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "wallet_address"
+                ],
+                "properties": {
+                  "wallet_address": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "stripe",
+                      "coinbase"
+                    ]
+                  },
+                  "chain": {
+                    "type": "string",
+                    "enum": [
+                      "base",
+                      "solana",
+                      "polygon"
+                    ]
+                  },
+                  "fiat_amount": {
+                    "type": "string"
+                  },
+                  "fiat_currency": {
+                    "type": "string"
+                  },
+                  "lock_wallet_address": {
+                    "type": "boolean"
+                  },
+                  "redirect_url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "wallet_address"
+                ],
+                "properties": {
+                  "wallet_address": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "stripe",
+                      "coinbase"
+                    ]
+                  },
+                  "chain": {
+                    "type": "string",
+                    "enum": [
+                      "base",
+                      "solana",
+                      "polygon"
+                    ]
+                  },
+                  "fiat_amount": {
+                    "type": "string"
+                  },
+                  "fiat_currency": {
+                    "type": "string"
+                  },
+                  "lock_wallet_address": {
+                    "type": "boolean"
+                  },
+                  "redirect_url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiOnrampCrypto",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Create a crypto onramp quote",
+        "description": "Create a crypto onramp quote via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/coinbase-onramp/status": {
+      "get": {
+        "operationId": "getApiCoinbase-onrampStatus",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Get Coinbase onramp status",
+        "description": "Get Coinbase onramp status via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/coinbase-onramp/supported": {
+      "get": {
+        "operationId": "getApiCoinbase-onrampSupported",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "List Coinbase onramp support",
+        "description": "List Coinbase onramp support via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/coinbase-onramp/url": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "addresses"
+                ],
+                "properties": {
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "chainId",
+                        "address"
+                      ],
+                      "properties": {
+                        "chainId": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "defaultChainId": {
+                    "type": "number"
+                  },
+                  "defaultAsset": {
+                    "type": "string"
+                  },
+                  "presetFiatAmount": {
+                    "type": "number"
+                  },
+                  "fiatCurrency": {
+                    "type": "string"
+                  },
+                  "redirectUrl": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "addresses"
+                ],
+                "properties": {
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "chainId",
+                        "address"
+                      ],
+                      "properties": {
+                        "chainId": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "defaultChainId": {
+                    "type": "number"
+                  },
+                  "defaultAsset": {
+                    "type": "string"
+                  },
+                  "presetFiatAmount": {
+                    "type": "number"
+                  },
+                  "fiatCurrency": {
+                    "type": "string"
+                  },
+                  "redirectUrl": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "addresses"
+                ],
+                "properties": {
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "chainId",
+                        "address"
+                      ],
+                      "properties": {
+                        "chainId": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "defaultChainId": {
+                    "type": "number"
+                  },
+                  "defaultAsset": {
+                    "type": "string"
+                  },
+                  "presetFiatAmount": {
+                    "type": "number"
+                  },
+                  "fiatCurrency": {
+                    "type": "string"
+                  },
+                  "redirectUrl": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiCoinbase-onrampUrl",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Create a Coinbase onramp URL",
+        "description": "Create a Coinbase onramp URL via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/coinbase-onramp/session/{sessionToken}/status": {
+      "get": {
+        "parameters": [
+          {
+            "name": "sessionToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiCoinbase-onrampSessionBySessionTokenStatus",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Get Coinbase session status",
+        "description": "Get Coinbase session status via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/coinbase-onramp/session/{sessionToken}/abandon": {
+      "post": {
+        "parameters": [
+          {
+            "name": "sessionToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "postApiCoinbase-onrampSessionBySessionTokenAbandon",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Abandon a Coinbase session",
+        "description": "Abandon a Coinbase session via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/stripe-onramp/status": {
+      "get": {
+        "operationId": "getApiStripe-onrampStatus",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Get Stripe onramp status",
+        "description": "Get Stripe onramp status via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/stripe-onramp/supported": {
+      "get": {
+        "operationId": "getApiStripe-onrampSupported",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "List Stripe onramp support",
+        "description": "List Stripe onramp support via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/stripe-onramp/session": {
+      "post": {
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "addresses"
+                ],
+                "properties": {
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "chainId",
+                        "address"
+                      ],
+                      "properties": {
+                        "chainId": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "lockWalletAddress": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "addresses"
+                ],
+                "properties": {
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "chainId",
+                        "address"
+                      ],
+                      "properties": {
+                        "chainId": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "lockWalletAddress": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "addresses"
+                ],
+                "properties": {
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "chainId",
+                        "address"
+                      ],
+                      "properties": {
+                        "chainId": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "lockWalletAddress": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postApiStripe-onrampSession",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Create a Stripe onramp session",
+        "description": "Create a Stripe onramp session via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/stripe-onramp/session/{sessionId}/status": {
+      "get": {
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getApiStripe-onrampSessionBySessionIdStatus",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Get Stripe session status",
+        "description": "Get Stripe session status via GET.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/stripe-onramp/session/{sessionId}/abandon": {
+      "post": {
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "postApiStripe-onrampSessionBySessionIdAbandon",
+        "tags": [
+          "Fiat"
+        ],
+        "summary": "Abandon a Stripe session",
+        "description": "Abandon a Stripe session via POST.",
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/mpp/fetch": {
+      "post": {
+        "operationId": "postApiMppFetch",
+        "tags": [
+          "MPP"
+        ],
+        "summary": "Fetch with MPP auto-pay",
+        "description": "Make one paid Tempo request with automatic MPP handling.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "chain": {
+                    "type": "string",
+                    "enum": [
+                      "tempo"
+                    ]
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "GET",
+                      "POST",
+                      "PUT",
+                      "DELETE",
+                      "PATCH"
+                    ]
+                  },
+                  "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "body": {}
+                }
+              },
+              "example": {
+                "chain": "tempo",
+                "url": "https://api.example.com/tempo",
+                "method": "GET"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/mpp/session/start": {
+      "post": {
+        "operationId": "postApiMppSessionStart",
+        "tags": [
+          "MPP"
+        ],
+        "summary": "Start an MPP session",
+        "description": "Open a Tempo MPP session for repeated paid requests.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chain": {
+                    "type": "string",
+                    "enum": [
+                      "tempo"
+                    ]
+                  },
+                  "max_deposit": {
+                    "type": "string"
+                  },
+                  "deposit": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "chain": "tempo",
+                "max_deposit": "5",
+                "deposit": "2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/mpp/session/request": {
+      "post": {
+        "operationId": "postApiMppSessionRequest",
+        "tags": [
+          "MPP"
+        ],
+        "summary": "Send an MPP session request",
+        "description": "Use an existing Tempo MPP session for a paid request. Set stream=true for SSE responses.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "session_id",
+                  "url"
+                ],
+                "properties": {
+                  "session_id": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "GET",
+                      "POST",
+                      "PUT",
+                      "DELETE",
+                      "PATCH"
+                    ]
+                  },
+                  "headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "body": {},
+                  "stream": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "example": {
+                "session_id": "session_123",
+                "url": "https://api.example.com/tempo-stream",
+                "method": "GET"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/mpp/session/close": {
+      "post": {
+        "operationId": "postApiMppSessionClose",
+        "tags": [
+          "MPP"
+        ],
+        "summary": "Close an MPP session",
+        "description": "Close an MPP session and release any unused deposit.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "session_id"
+                ],
+                "properties": {
+                  "session_id": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "session_id": "session_123",
+                "reason": "done"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/mpp/sessions": {
+      "get": {
+        "operationId": "getApiMppSessions",
+        "tags": [
+          "MPP"
+        ],
+        "summary": "List MPP sessions",
+        "description": "List recent MPP sessions for the current agent.",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/credit-cards": {
+      "post": {
+        "operationId": "postApiCreditCards",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Store a credit card",
+        "description": "Store card details as an encrypted agent payment method for checkout. Prefer dashboard tokenization when possible; use this endpoint only for trusted agent flows that already have the user's card details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreCreditCardRequest"
+              },
+              "example": {
+                "card_number": "4111111111111111",
+                "expiration": "12/2030",
+                "cvc": "123",
+                "cardholder_name": "Jane Doe",
+                "email": "jane@example.com",
+                "billing_address": {
+                  "line1": "123 Market St",
+                  "city": "San Francisco",
+                  "state": "CA",
+                  "postal_code": "94105",
+                  "country": "US"
+                },
+                "shipping_address": {
+                  "line1": "123 Market St",
+                  "city": "San Francisco",
+                  "state": "CA",
+                  "postal_code": "94105",
+                  "country": "US",
+                  "phone": "+14155550123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      },
+      "get": {
+        "operationId": "getApiCreditCards",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "List stored credit card payment methods",
+        "description": "List saved credit card payment methods for the agent, including the default payment method. Raw card numbers and CVCs are not returned.",
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required when not authenticating with an agent API key."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/agents/{id}/link-payment-methods/link": {
+      "post": {
+        "operationId": "postApiAgentsIdLinkPaymentMethodsLink",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Connect or save a Link payment method",
+        "description": "Start Link setup, or save a selected Link payment method with contact and shipping data after the user completes Link.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkPaymentMethodRequest"
+              },
+              "example": {
+                "clientName": "Checkout"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Agent ID."
+          }
+        ]
+      }
+    },
+    "/api/agents/{id}/link-payment-methods/credential": {
+      "post": {
+        "operationId": "postApiAgentsIdLinkPaymentMethodsCredential",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Create a Link payment credential",
+        "description": "Generate a one-time card credential from a saved Link payment method for a specific merchant and amount.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkPaymentCredentialRequest"
+              },
+              "example": {
+                "linkPaymentMethodId": "lpm_123",
+                "amount": "25.00",
+                "currency": "USD",
+                "merchantName": "Example",
+                "merchantUrl": "https://example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Agent ID."
+          }
+        ]
+      }
+    },
+    "/api/cards": {
+      "post": {
+        "operationId": "postApiCards",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Get a checkout card",
+        "description": "Fetch a usable checkout card from Sponge Card or a vaulted card source. If more than one card source is available, the API can return a selection response.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCardRequest"
+              },
+              "example": {
+                "card_type": "sponge_card",
+                "amount": "25.00",
+                "currency": "USD",
+                "merchant_name": "Example",
+                "merchant_url": "https://example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/virtual-cards": {
+      "post": {
+        "operationId": "postApiVirtualCards",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Issue a virtual card",
+        "description": "Issue a per-transaction virtual card for a specific merchant and amount.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueVirtualCardRequest"
+              },
+              "example": {
+                "amount": "25.00",
+                "currency": "USD",
+                "merchant_name": "Example",
+                "merchant_url": "https://example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/card-usage": {
+      "post": {
+        "operationId": "postApiCardUsage",
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Report card usage",
+        "description": "Report the outcome of a purchase attempt that used a stored or vaulted card.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportCardUsageRequest"
+              },
+              "example": {
+                "payment_method_id": "pm_123",
+                "status": "success",
+                "amount": "25.00",
+                "currency": "USD",
+                "merchant_name": "Example"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/status": {
+      "get": {
+        "operationId": "getApiSpongeCardStatus",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Get Sponge Card status",
+        "description": "Get Sponge Card onboarding, consent, card, and balance status. Spending power fields include both cents and formatted USD display values.",
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required when not authenticating with an agent API key."
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Force-refresh issuer application status."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/onboard": {
+      "post": {
+        "operationId": "postApiSpongeCardOnboard",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Start Sponge Card onboarding",
+        "description": "Start Sponge Card onboarding, return a KYC verification link when needed, or continue the issuer application after KYC.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpongeCardOnboardRequest"
+              },
+              "example": {
+                "redirect_uri": "https://example.com/kyc-return"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/terms": {
+      "post": {
+        "operationId": "postApiSpongeCardTerms",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Accept Sponge Card terms",
+        "description": "Record Sponge Card consent acknowledgements for an existing application.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpongeCardTermsRequest"
+              },
+              "example": {
+                "e_sign_consent": true,
+                "sponge_card_terms": true,
+                "information_certification": true,
+                "unauthorized_solicitation_acknowledgement": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/create-card": {
+      "post": {
+        "operationId": "postApiSpongeCardCreateCard",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Create a Sponge Card",
+        "description": "Create the virtual Sponge Card after onboarding is approved and consent is accepted.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSpongeCardRequest"
+              },
+              "example": {
+                "billing": {
+                  "line1": "123 Market St",
+                  "city": "San Francisco",
+                  "region": "CA",
+                  "postal_code": "94105",
+                  "country_code": "US"
+                },
+                "email": "jane@example.com",
+                "phone": "+14155550123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/details": {
+      "get": {
+        "operationId": "getApiSpongeCardDetails",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Get Sponge Card details",
+        "description": "Fetch encrypted PAN/CVC for the user's Sponge Card plus a one-time secret_key for local decryption. Treat this response as sensitive.",
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required when not authenticating with an agent API key."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/fund": {
+      "post": {
+        "operationId": "postApiSpongeCardFund",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Fund Sponge Card collateral",
+        "description": "Top up Sponge Card collateral with USDC from the wallet.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpongeCardAmountRequest"
+              },
+              "example": {
+                "amount": "100.00",
+                "chain": "base"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/sponge-card/withdraw": {
+      "post": {
+        "operationId": "postApiSpongeCardWithdraw",
+        "tags": [
+          "Sponge Card"
+        ],
+        "summary": "Withdraw Sponge Card collateral",
+        "description": "Withdraw Sponge Card collateral back to the wallet, reducing card spending power.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpongeCardAmountRequest"
+              },
+              "example": {
+                "amount": "50.00",
+                "chain": "base"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/agent-keys": {
+      "post": {
+        "operationId": "postApiAgentKeys",
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Store a service key",
+        "description": "Store an encrypted non-card service key for this agent. Use /api/credit-cards for card details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentKeyRequest"
+              },
+              "example": {
+                "service": "openai",
+                "key": "sk-...",
+                "label": "primary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      },
+      "get": {
+        "operationId": "getApiAgentKeys",
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "List stored keys",
+        "description": "List stored key metadata for the agent. Values are not returned.",
+        "parameters": [
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required when not authenticating with an agent API key."
+          },
+          {
+            "name": "service",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional service filter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteApiAgentKeys",
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Delete a stored key",
+        "description": "Delete a stored non-card service key by service. Credit cards are stored as agent payment methods.",
+        "parameters": [
+          {
+            "name": "service",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service name."
+          },
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required when not authenticating with an agent API key."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    },
+    "/api/agent-keys/value": {
+      "get": {
+        "operationId": "getApiAgentKeysValue",
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Get a stored key value",
+        "description": "Retrieve one decrypted non-card key value. Credit cards are stored as agent payment methods and are not returned from this endpoint.",
+        "parameters": [
+          {
+            "name": "service",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Service name."
+          },
+          {
+            "name": "agentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required when not authenticating with an agent API key."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "provider": "sponge",
+  "sources": [
+    "sponge-agents-api-openapi.yml",
+    "sponge-cards-api-openapi.yml",
+    "sponge-fiat-api-openapi.yml",
+    "sponge-mpp-api-openapi.yml",
+    "sponge-payments-api-openapi.yml",
+    "sponge-secrets-api-openapi.yml",
+    "sponge-sponge-card-api-openapi.yml",
+    "sponge-trading-api-openapi.yml",
+    "sponge-transfers-api-openapi.yml",
+    "sponge-wallet-api-openapi.yml"
+  ],
+  "outputs": [
+    "sponge-agents-api-openapi.yml",
+    "sponge-cards-api-openapi.yml",
+    "sponge-fiat-api-openapi.yml",
+    "sponge-mpp-api-openapi.yml",
+    "sponge-payments-api-openapi.yml",
+    "sponge-secrets-api-openapi.yml",
+    "sponge-sponge-card-api-openapi.yml",
+    "sponge-trading-api-openapi.yml",
+    "sponge-transfers-api-openapi.yml",
+    "sponge-wallet-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/sponge-openapi-original.json
+docs: https://docs.paysponge.com/wallet/ai-agents.md
+description: >-
+  Sponge's public Wallet API authenticates with a per-agent bearer API key. A
+  browser device flow issues agent credentials interactively; agent keys are used
+  non-interactively for servers/CI. Separately, an OAuth 2.0 / OIDC authorization
+  server (S256 PKCE, dynamic client registration) fronts the hosted MCP servers
+  for connectors that support OAuth.
+summary:
+  types:
+  - http
+  - oauth2
+  - openIdConnect
+  api_key_prefixes: [sponge_live_, sponge_test_]
+  oauth2_flows: [authorizationCode]
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  key_prefixes: [sponge_live_, sponge_test_]
+  env: SPONGE_API_KEY
+  sources:
+  - openapi/sponge-openapi-original.json
+  - https://docs.paysponge.com/wallet/ai-agents.md
+- name: DeviceFlow
+  type: oauth2-device
+  description: SpongeWallet.connect() starts a browser-based device flow when no local credentials exist; credentials cached at ~/.spongewallet/credentials.json with owner-only permissions.
+  sources:
+  - https://docs.paysponge.com/wallet/ai-agents.md
+- name: OAuth2
+  type: oauth2
+  description: OAuth 2.0 authorization-code flow (S256 PKCE, dynamic client registration) fronting the hosted MCP servers.
+  authorization_url: https://api.wallet.paysponge.com/oauth/authorize
+  token_url: https://api.wallet.paysponge.com/oauth/token
+  scopes_ref: scopes/sponge-scopes.yml
+  sources:
+  - well-known/sponge-openid-configuration.json
+- name: SIWE
+  type: eip-4361
+  description: Sign-In With Ethereum (EIP-4361) signatures for endpoints that require them (POST /api/siwe/generate).
+  sources:
+  - https://sponge.md

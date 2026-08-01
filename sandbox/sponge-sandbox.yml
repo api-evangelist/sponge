@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.paysponge.com/wallet/mcp.md
+description: >-
+  Sponge separates test and live via key prefixes. Test keys expose the same tool
+  surface as live keys, except mainnet-only capabilities are hidden. No published
+  magic test card numbers or fixture values were found at capture time; only the
+  test/live mode separation is documented.
+test_live_separation:
+  wallet_keys:
+    live_prefix: sponge_live_
+    test_prefix: sponge_test_
+  gateway_keys:
+    live_prefix: sk_live_
+    test_prefix: sk_test_
+test_mode_behavior:
+- >-
+  Test keys hide the create_crypto_onramp tool on the trading MCP server because
+  crypto onramp links are mainnet-only.
+- >-
+  The Gateway MCP server accepts either sk_test_ or sk_live_ bearer keys (or a
+  dashboard session cookie).
+test_values:
+  documented: false
+  notes: No published test card numbers, test IBANs, or magic test identifiers were found in the docs at capture time.

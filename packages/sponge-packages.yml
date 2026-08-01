@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.paysponge.com/wallet/sdk.md
+packages:
+- language: javascript
+  registry: npm
+  name: "@paysponge/sdk"
+  url: https://www.npmjs.com/package/@paysponge/sdk
+  install: npm install @paysponge/sdk
+  version: 0.1.147
+  license: MIT
+  repository: https://github.com/paysponge/sponge
+  description: >-
+    TypeScript SDK for spinning up wallets for AI agents, with SpongeWallet
+    (agent-scoped wallet operations) and SpongePlatform (master-key backend
+    agent management), plus MCP, Claude Agent SDK, Vercel AI SDK and OpenAI
+    Agents SDK integrations.
+  official: true
+- language: python
+  registry: pypi
+  name: paysponge
+  url: https://pypi.org/project/paysponge/
+  install: pip install paysponge
+  version: 0.1.5
+  repository: https://github.com/paysponge/sponge
+  description: Python SDK for PaySponge — SpongeWallet client for agent wallet, transfers, swaps and payments.
+  official: true
+- language: javascript
+  registry: npm
+  name: spongewallet
+  kind: cli
+  url: https://www.npmjs.com/package/spongewallet
+  install: npx spongewallet
+  version: 0.1.127
+  description: >-
+    First-party command-line wallet — init/login agents and run curated wallet,
+    card, swap, trading, and paid-service commands. See cli/sponge-cli.yml for the
+    command surface.
+  official: true

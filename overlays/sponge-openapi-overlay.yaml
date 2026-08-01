@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sponge public API
+  version: 1.0.0
+extends: openapi/sponge-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: sponge
+    x-apievangelist-company: Sponge
+    x-apievangelist-required-header: 'Sponge-Version (required on every request; current 0.2.2)'
+    x-apievangelist-agent-payments: [x402, MPP]
+    x-apievangelist-mcp:
+      wallet: https://api.wallet.paysponge.com/mcp
+      trading: https://api.wallet.paysponge.com/trade/mcp
+      gateway: https://api.paysponge.com/mcp
+    x-apievangelist-sdks:
+      typescript: "@paysponge/sdk"
+      python: paysponge
+      cli: spongewallet
+- target: $.info
+  update:
+    x-apievangelist-notes: >-
+      Public REST API for AI-agent wallets and payments. Bearer API-key auth
+      (sponge_live_/sponge_test_); OAuth 2.0 + OIDC (S256 PKCE) fronts the hosted
+      MCP servers. The spec documents only 2xx responses — no error catalog is
+      published upstream.
+- target: $.servers
+  update:
+    x-apievangelist-production-host: api.wallet.paysponge.com

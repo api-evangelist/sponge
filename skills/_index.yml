@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+description: >-
+  Agent Skills for Sponge. The provider publishes a comprehensive verbatim skill
+  (sponge-wallet.md, captured from https://sponge.md); the remaining skills are
+  generated from the public OpenAPI, each grounded in verified operationIds.
+skills:
+- file: sponge-wallet.md
+  name: sponge-wallet
+  version: 0.2.2
+  method: searched
+  source: https://sponge.md
+  description: Official published Sponge Wallet agent skill — wallet, swaps, bridges, payment links, x402/MPP paid services, trading, cards, banking, onramp.
+  homepage: https://wallet.paysponge.com
+- file: sponge-pay-for-service.md
+  name: Pay for a paid service with a Sponge wallet
+  method: generated
+  api: openapi/sponge-openapi-original.json
+  operations: [getApiBalances, postApiX402Fetch, postApiMppFetch]
+- file: sponge-issue-and-fund-card.md
+  name: Issue and fund a Sponge Card
+  method: generated
+  api: openapi/sponge-openapi-original.json
+  operations: [getApiSpongeCardStatus, postApiSpongeCardOnboard, postApiSpongeCardTerms, postApiSpongeCardCreateCard, postApiSpongeCardFund, getApiSpongeCardDetails]

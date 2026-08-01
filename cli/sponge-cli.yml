@@ -1,0 +1,82 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.paysponge.com/wallet/cli.md
+name: spongewallet
+binary: spongewallet
+package: https://www.npmjs.com/package/spongewallet
+install:
+- npx spongewallet
+- npm install -g spongewallet
+auth:
+  device_flow: spongewallet init / spongewallet login
+  api_key: SPONGE_API_KEY env or agent key (sponge_live_...)
+  credentials_file: ~/.spongewallet/credentials.json
+commands:
+- group: auth
+  commands:
+  - spongewallet init
+  - spongewallet login
+  - spongewallet login --switch
+  - spongewallet logout
+  - spongewallet whoami
+  - spongewallet auth siwe
+  - spongewallet version --check
+- group: wallet
+  commands:
+  - spongewallet balance
+  - spongewallet balance --chain
+  - spongewallet balance --allowed-chains
+  - spongewallet tokens
+  - spongewallet search-tokens
+  - spongewallet history
+- group: transfers
+  commands:
+  - spongewallet send base
+  - spongewallet tx send
+  - spongewallet tx sign
+  - spongewallet tx status
+- group: swaps-and-bridges
+  commands:
+  - spongewallet swap solana
+  - spongewallet swap base
+  - spongewallet swap tempo
+  - spongewallet swap quote
+  - spongewallet swap execute
+  - spongewallet bridge base
+  - spongewallet onramp base
+- group: cards
+  commands:
+  - spongewallet card create
+  - spongewallet card virtual
+  - spongewallet card add
+  - spongewallet card store
+  - spongewallet card link
+  - spongewallet card get
+  - spongewallet card details
+  - spongewallet card status
+  - spongewallet card onboard
+  - spongewallet card terms
+  - spongewallet card fund
+  - spongewallet card withdraw
+  - spongewallet card usage
+  - spongewallet card vaulted
+- group: paid-services
+  commands:
+  - spongewallet pay discover
+  - spongewallet pay service
+  - spongewallet pay fetch
+  - spongewallet pay x402
+  - spongewallet pay mpp
+- group: trading
+  commands:
+  - spongewallet market hyperliquid
+  - spongewallet market polymarket
+  - spongewallet trade propose
+  - spongewallet plan submit
+  - spongewallet plan approve
+- group: keys-and-mcp
+  commands:
+  - spongewallet keys get
+  - spongewallet keys set
+  - spongewallet keys list
+  - spongewallet mcp print

@@ -1,22 +1,235 @@
 aid: sponge
 name: Sponge
-description: Sponge is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Sponge builds financial infrastructure for the agent economy — wallets that let
+  AI agents hold and spend money, and a gateway that lets businesses sell services
+  directly to agents. The Sponge Wallet API gives an agent its own multi-chain
+  crypto wallet with balances, transfers, swaps, cross-chain bridges, payment
+  links, cards (including a Rain-issued Visa Sponge Card), fiat onramps (Coinbase,
+  Stripe), and trading on Hyperliquid and Polymarket, plus paid access to external
+  services via the x402 and MPP agent-payment protocols. A TypeScript and Python
+  SDK, a spongewallet CLI, and hosted MCP servers ship first-party. Backed by
+  Y Combinator (W2026).
 url: https://raw.githubusercontent.com/api-evangelist/sponge/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - y-combinator
-x-tier: stub
-x-tier-reason: portfolio-lead
-specificationVersion: '0.20'
-created: '2026-07-17'
-modified: '2026-07-17'
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://paysponge.com/logo.png
 tags:
 - Company
-apis: []
+- Agent Payments
+- AI Agents
+- Wallets
+- Cryptocurrency
+- Payments
+- Stablecoins
+- x402
+- MPP
+- Financial Infrastructure
+- MCP
+- Fintech
+- Cards
+- Onramp
+created: '2026-07-17'
+modified: '2026-07-21'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: sponge:sponge-agents-api
+  name: Sponge Agents API
+  description: The Agents API from Sponge — 5 operation(s) for agents.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-agents-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-cards-api
+  name: Sponge Cards API
+  description: The Cards API from Sponge — 6 operation(s) for cards.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-cards-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-fiat-api
+  name: Sponge Fiat API
+  description: The Fiat API from Sponge — 11 operation(s) for fiat.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Fiat
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-fiat-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-mpp-api
+  name: Sponge MPP API
+  description: The MPP API from Sponge — 5 operation(s) for mpp.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - MPP
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-mpp-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-payments-api
+  name: Sponge Payments API
+  description: The Payments API from Sponge — 1 operation(s) for payments.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-payments-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-secrets-api
+  name: Sponge Secrets API
+  description: The Secrets API from Sponge — 2 operation(s) for secrets.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-secrets-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-sponge-card-api
+  name: Sponge Sponge Card API
+  description: The Sponge Card API from Sponge — 7 operation(s) for sponge card.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Sponge Card
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-sponge-card-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-trading-api
+  name: Sponge Trading API
+  description: The Trading API from Sponge — 1 operation(s) for trading.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Trading
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-trading-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-transfers-api
+  name: Sponge Transfers API
+  description: The Transfers API from Sponge — 9 operation(s) for transfers.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-transfers-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+- aid: sponge:sponge-wallet-api
+  name: Sponge Wallet API
+  description: The Wallet API from Sponge — 4 operation(s) for wallet.
+  humanURL: https://docs.paysponge.com
+  baseURL: https://api.wallet.paysponge.com
+  tags:
+  - Wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/sponge-wallet-api-openapi.yml
+  - type: APIReference
+    url: https://docs.paysponge.com/api-reference/public-openapi.json
+common:
+- type: Website
+  url: https://paysponge.com
+- type: DeveloperPortal
+  url: https://docs.paysponge.com
+- type: Documentation
+  url: https://docs.paysponge.com
+- type: GettingStarted
+  url: https://docs.paysponge.com/wallet/sdk.md
+- type: Support
+  url: https://discord.gg/gwH2QqMDaX
+- type: GitHubOrganization
+  url: https://github.com/paysponge
+- type: SignUp
+  url: https://wallet.paysponge.com
+- type: TermsOfService
+  url: https://paysponge.com/terms
+- type: PrivacyPolicy
+  url: https://paysponge.com/privacy
+- type: Authentication
+  url: authentication/sponge-authentication.yml
+- type: OAuthScopes
+  url: scopes/sponge-scopes.yml
+- type: DomainSecurity
+  url: security/sponge-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/sponge-agentic-access.yml
+- type: MCPServer
+  url: mcp/sponge-mcp.yml
+- type: LLMsTxt
+  url: llms/sponge-llms.txt
+- type: Packages
+  url: packages/sponge-packages.yml
+- type: SDKs
+  url: packages/sponge-packages.yml
+- type: CLI
+  url: cli/sponge-cli.yml
+- type: WellKnown
+  url: well-known/sponge-well-known.yml
+- type: Conventions
+  url: conventions/sponge-conventions.yml
+- type: Conformance
+  url: conformance/sponge-conformance.yml
+- type: DataModel
+  url: data-model/sponge-data-model.yml
+- type: Lifecycle
+  url: lifecycle/sponge-lifecycle.yml
+- type: Sandbox
+  url: sandbox/sponge-sandbox.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Check balance, transfer, and confirm
+  url: arazzo/sponge-transfer-and-confirm.yml
+- type: Arazzo
+  name: Create an agent and issue its key
+  url: arazzo/sponge-agent-onboarding.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

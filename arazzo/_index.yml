@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sponge-openapi-original.json
+workflows:
+- file: sponge-transfer-and-confirm.yml
+  workflowId: transferAndConfirm
+  title: Check balance, transfer, and confirm
+  summary: Read wallet balances, send an EVM transfer, then poll transaction status.
+- file: sponge-agent-onboarding.yml
+  workflowId: createAgentAndKey
+  title: Create an agent and issue its key
+  summary: Platform backend creates a new agent, then mints an agent API key for runtime use.
