@@ -172,6 +172,8 @@ apis:
   - type: APIReference
     url: https://docs.paysponge.com/api-reference/public-openapi.json
 common:
+- type: Overlay
+  url: overlays/sponge-openapi-overlay.yaml
 - type: Website
   url: https://paysponge.com
 - type: DeveloperPortal
