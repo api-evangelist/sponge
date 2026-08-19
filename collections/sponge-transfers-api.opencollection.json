@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Transfers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send an EVM transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/transfers/evm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send an EVM transfer via POST."
+        },
+        {
+          "info": {
+            "name": "Send a Solana transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/transfers/solana",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a Solana transfer via POST."
+        },
+        {
+          "info": {
+            "name": "List Solana wallet tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/solana/tokens",
+            "params": [
+              {
+                "name": "chain",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Solana wallet tokens via GET."
+        },
+        {
+          "info": {
+            "name": "Search Solana tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/solana/tokens/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Solana tokens via GET."
+        },
+        {
+          "info": {
+            "name": "Get transaction history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/transactions/history",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "chain",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get transaction history via GET."
+        },
+        {
+          "info": {
+            "name": "Get transaction status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/transactions/status/:txHash",
+            "params": [
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chain",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get transaction status via GET."
+        },
+        {
+          "info": {
+            "name": "Swap on Solana",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/transactions/swap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Swap on Solana via POST."
+        },
+        {
+          "info": {
+            "name": "Swap on Base",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/transactions/base-swap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Swap on Base via POST."
+        },
+        {
+          "info": {
+            "name": "Bridge across chains",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/transactions/bridge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bridge across chains via POST."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

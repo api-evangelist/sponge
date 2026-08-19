@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "b4cf01f7-367c-4643-b829-20df0d9bc053",
+      "name": "Trading",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dab4f6e-f497-47c7-8e76-db654cc99745",
+          "name": "Trade on Hyperliquid",
+          "request": {
+            "name": "Trade on Hyperliquid",
+            "description": {
+              "content": "Trade on Hyperliquid via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "hyperliquid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "side",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "reduce_only",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "trigger_price",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tp_sl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tif",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "leverage",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "market_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "full",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "destination",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_perp",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "abstraction",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7c921d42-9d09-4380-956d-32039d43ec40",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "hyperliquid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "price",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "reduce_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "trigger_price",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tp_sl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "tif",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "leverage",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "since",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "market_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "full",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "destination",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "to_perp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "abstraction",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wallet.paysponge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "089721be-108b-41c0-9f0b-0d6c862461fc",
+    "name": "Sponge public Agents Trading API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.",
+      "type": "text/plain"
+    }
+  }
+}

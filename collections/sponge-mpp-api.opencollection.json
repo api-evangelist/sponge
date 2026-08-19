@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents MPP API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MPP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch with MPP auto-pay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/mpp/fetch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make one paid Tempo request with automatic MPP handling."
+        },
+        {
+          "info": {
+            "name": "Start an MPP session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/mpp/session/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Open a Tempo MPP session for repeated paid requests."
+        },
+        {
+          "info": {
+            "name": "Send an MPP session request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/mpp/session/request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use an existing Tempo MPP session for a paid request. Set stream=true for SSE responses."
+        },
+        {
+          "info": {
+            "name": "Close an MPP session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/mpp/session/close",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Close an MPP session and release any unused deposit."
+        },
+        {
+          "info": {
+            "name": "List MPP sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/mpp/sessions",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List recent MPP sessions for the current agent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

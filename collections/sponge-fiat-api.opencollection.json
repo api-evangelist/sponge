@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Fiat API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fiat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a crypto onramp quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/onramp/crypto",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a crypto onramp quote via POST."
+        },
+        {
+          "info": {
+            "name": "Get Coinbase onramp status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/coinbase-onramp/status"
+          },
+          "docs": "Get Coinbase onramp status via GET."
+        },
+        {
+          "info": {
+            "name": "List Coinbase onramp support",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/coinbase-onramp/supported"
+          },
+          "docs": "List Coinbase onramp support via GET."
+        },
+        {
+          "info": {
+            "name": "Create a Coinbase onramp URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/coinbase-onramp/url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Coinbase onramp URL via POST."
+        },
+        {
+          "info": {
+            "name": "Get Coinbase session status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/coinbase-onramp/session/:sessionToken/status",
+            "params": [
+              {
+                "name": "sessionToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Coinbase session status via GET."
+        },
+        {
+          "info": {
+            "name": "Abandon a Coinbase session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/coinbase-onramp/session/:sessionToken/abandon",
+            "params": [
+              {
+                "name": "sessionToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Abandon a Coinbase session via POST."
+        },
+        {
+          "info": {
+            "name": "Get Stripe onramp status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/stripe-onramp/status"
+          },
+          "docs": "Get Stripe onramp status via GET."
+        },
+        {
+          "info": {
+            "name": "List Stripe onramp support",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/stripe-onramp/supported"
+          },
+          "docs": "List Stripe onramp support via GET."
+        },
+        {
+          "info": {
+            "name": "Create a Stripe onramp session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/stripe-onramp/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Stripe onramp session via POST."
+        },
+        {
+          "info": {
+            "name": "Get Stripe session status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/stripe-onramp/session/:sessionId/status",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Stripe session status via GET."
+        },
+        {
+          "info": {
+            "name": "Abandon a Stripe session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/stripe-onramp/session/:sessionId/abandon",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Abandon a Stripe session via POST."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

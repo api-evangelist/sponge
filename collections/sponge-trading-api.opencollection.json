@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Trading API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trading",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Trade on Hyperliquid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/hyperliquid",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trade on Hyperliquid via POST."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch with x402 auto-pay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/x402/fetch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch with x402 auto-pay via POST."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

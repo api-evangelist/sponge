@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Cards API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List stored credit card payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/credit-cards",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "query",
+                "description": "Required when not authenticating with an agent API key."
+              }
+            ]
+          },
+          "docs": "List saved credit card payment methods for the agent, including the default payment method. Raw card numbers and CVCs are not returned."
+        },
+        {
+          "info": {
+            "name": "Store a credit card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/credit-cards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Store card details as an encrypted agent payment method for checkout. Prefer dashboard tokenization when possible; use this endpoint only for trusted agent flows that already have the user's card details."
+        },
+        {
+          "info": {
+            "name": "Connect or save a Link payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id/link-payment-methods/link",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start Link setup, or save a selected Link payment method with contact and shipping data after the user completes Link."
+        },
+        {
+          "info": {
+            "name": "Create a Link payment credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id/link-payment-methods/credential",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a one-time card credential from a saved Link payment method for a specific merchant and amount."
+        },
+        {
+          "info": {
+            "name": "Get a checkout card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/cards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch a usable checkout card from Sponge Card or a vaulted card source. If more than one card source is available, the API can return a selection response."
+        },
+        {
+          "info": {
+            "name": "Issue a virtual card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/virtual-cards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue a per-transaction virtual card for a specific merchant and amount."
+        },
+        {
+          "info": {
+            "name": "Report card usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/card-usage",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Report the outcome of a purchase attempt that used a stored or vaulted card."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

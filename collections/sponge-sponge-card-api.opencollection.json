@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Sponge Card API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sponge Card",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Sponge Card status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/status",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "query",
+                "description": "Required when not authenticating with an agent API key."
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "Force-refresh issuer application status."
+              }
+            ]
+          },
+          "docs": "Get Sponge Card onboarding, consent, card, and balance status. Spending power fields include both cents and formatted USD display values."
+        },
+        {
+          "info": {
+            "name": "Start Sponge Card onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/onboard",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start Sponge Card onboarding, return a KYC verification link when needed, or continue the issuer application after KYC."
+        },
+        {
+          "info": {
+            "name": "Accept Sponge Card terms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/terms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record Sponge Card consent acknowledgements for an existing application."
+        },
+        {
+          "info": {
+            "name": "Create a Sponge Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/create-card",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create the virtual Sponge Card after onboarding is approved and consent is accepted."
+        },
+        {
+          "info": {
+            "name": "Get Sponge Card details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/details",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "query",
+                "description": "Required when not authenticating with an agent API key."
+              }
+            ]
+          },
+          "docs": "Fetch encrypted PAN/CVC for the user's Sponge Card plus a one-time secret_key for local decryption. Treat this response as sensitive."
+        },
+        {
+          "info": {
+            "name": "Fund Sponge Card collateral",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/fund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Top up Sponge Card collateral with USDC from the wallet."
+        },
+        {
+          "info": {
+            "name": "Withdraw Sponge Card collateral",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/sponge-card/withdraw",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdraw Sponge Card collateral back to the wallet, reducing card spending power."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -5,32 +5,31 @@ source: https://docs.paysponge.com/wallet/mcp.md
 docs:
 - https://docs.paysponge.com/wallet/mcp.md
 - https://docs.paysponge.com/gateway/mcp.md
-description: >-
-  Sponge publishes official, hosted (remote) MCP servers for both the agent
-  Wallet and the merchant Gateway. Wallet servers authenticate with an agent API
-  key (sponge_live_...) for CLI clients, or OAuth 2.0 (PKCE, dynamic client
-  registration) for connectors that support it. The Gateway server authenticates
-  with sk_test_/sk_live_ secret keys or a dashboard session cookie.
+description: Sponge publishes official, hosted (remote) MCP servers for both the agent Wallet and the
+  merchant Gateway. Wallet servers authenticate with an agent API key (sponge_live_...) for CLI clients,
+  or OAuth 2.0 (PKCE, dynamic client registration) for connectors that support it. The Gateway server
+  authenticates with sk_test_/sk_live_ secret keys or a dashboard session cookie.
 servers:
 - name: sponge-wallet
   transport: http
   url: https://api.wallet.paysponge.com/mcp
   auth: bearer agent API key (sponge_live_...) or OAuth 2.0 (S256 PKCE)
-  description: Full agent wallet tool surface — balances, transfers, swaps, bridges, cards, x402/MPP payments, trading, onramp.
+  description: Full agent wallet tool surface — balances, transfers, swaps, bridges, cards, x402/MPP payments,
+    trading, onramp.
 - name: sponge-wallet-trading
   transport: http
   url: https://api.wallet.paysponge.com/trade/mcp
   auth: bearer agent API key (sponge_live_...) or OAuth 2.0
-  description: >-
-    Trading-only server exposing get_balance, render_portfolio_ui, render_trade_ui,
-    transfer, bridge, create_crypto_onramp (mainnet-only; hidden on test keys),
-    and a read-only hyperliquid tool. Ships MCP Apps UI widgets for ChatGPT.
+  description: Trading-only server exposing get_balance, render_portfolio_ui, render_trade_ui, transfer,
+    bridge, create_crypto_onramp (mainnet-only; hidden on test keys), and a read-only hyperliquid tool.
+    Ships MCP Apps UI widgets for ChatGPT.
   tools:
   - name: get_balance
   - name: render_portfolio_ui
     description: Read-only MCP Apps widget with balances plus Hyperliquid and Polymarket status.
   - name: render_trade_ui
-    description: Prefilled Hyperliquid confirmation widget; submits the confirmed order via an app-only execution tool.
+    description: Prefilled Hyperliquid confirmation widget; submits the confirmed order via an app-only
+      execution tool.
   - name: transfer
   - name: bridge
   - name: create_crypto_onramp
@@ -41,14 +40,14 @@ servers:
   transport: http
   url: https://api.paysponge.com/mcp
   auth: bearer sk_test_/sk_live_ secret key or dashboard session cookie
-  description: >-
-    Merchant Gateway server for spec-first service creation — inspect docs,
-    discover/import an OpenAPI spec, plan and create paid gateway services and
-    endpoints. Writes the same objects as /api/services and /api/endpoints.
+  description: Merchant Gateway server for spec-first service creation — inspect docs, discover/import
+    an OpenAPI spec, plan and create paid gateway services and endpoints. Writes the same objects as /api/services
+    and /api/endpoints.
   tools:
   - name: list_services
   - name: plan_service_from_source
-    description: Safest default — rejects ambiguous index pages, tries OpenAPI sources first, returns a deterministic service draft.
+    description: Safest default — rejects ambiguous index pages, tries OpenAPI sources first, returns
+      a deterministic service draft.
   - name: discover_openapi_spec
   - name: fetch_openapi_spec
   - name: apply_service_plan
@@ -59,3 +58,10 @@ servers:
   - name: update_endpoint
   - name: delete_endpoint
   - name: import_from_spec
+deployment:
+  mode: remote
+  endpoint: https://api.wallet.paysponge.com/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

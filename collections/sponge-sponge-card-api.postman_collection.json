@@ -1,0 +1,694 @@
+{
+  "item": [
+    {
+      "id": "755cfb67-61dd-4b9d-bb9d-74f8d6269aee",
+      "name": "Sponge Card",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "97ecb40b-2af3-4bc3-9d1d-66edc16fbf8e",
+          "name": "Get Sponge Card status",
+          "request": {
+            "name": "Get Sponge Card status",
+            "description": {
+              "content": "Get Sponge Card onboarding, consent, card, and balance status. Spending power fields include both cents and formatted USD display values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agentId",
+                  "value": "<string>",
+                  "description": "Required when not authenticating with an agent API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "refresh",
+                  "value": "<boolean>",
+                  "description": "Force-refresh issuer application status."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4c05167-6cf3-480b-8271-67c50146c1ba",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "refresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a3ed0e6-6325-41bd-8a96-67b46651d2aa",
+          "name": "Start Sponge Card onboarding",
+          "request": {
+            "name": "Start Sponge Card onboarding",
+            "description": {
+              "content": "Start Sponge Card onboarding, return a KYC verification link when needed, or continue the issuer application after KYC.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "onboard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentId\": \"<string>\",\n  \"occupation\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"e_sign_consent\": \"<boolean>\",\n  \"account_opening_privacy_notice\": \"<boolean>\",\n  \"sponge_card_terms\": \"<boolean>\",\n  \"information_certification\": \"<boolean>\",\n  \"unauthorized_solicitation_acknowledgement\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a45e9af-8a1f-420b-b2e5-9fb00a88ed4b",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "onboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"redirect_uri\": \"https://example.com/kyc-return\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de484962-d6f3-4951-946b-a0940449020b",
+          "name": "Accept Sponge Card terms",
+          "request": {
+            "name": "Accept Sponge Card terms",
+            "description": {
+              "content": "Record Sponge Card consent acknowledgements for an existing application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "terms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"e_sign_consent\": \"<boolean>\",\n  \"sponge_card_terms\": \"<boolean>\",\n  \"information_certification\": \"<boolean>\",\n  \"unauthorized_solicitation_acknowledgement\": \"<boolean>\",\n  \"agentId\": \"<string>\",\n  \"account_opening_privacy_notice\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27f38383-df49-4e97-b81a-a48a34329a91",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"e_sign_consent\": true,\n  \"sponge_card_terms\": true,\n  \"information_certification\": true,\n  \"unauthorized_solicitation_acknowledgement\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df506724-7584-4f4a-8008-7928be5d7ca0",
+          "name": "Create a Sponge Card",
+          "request": {
+            "name": "Create a Sponge Card",
+            "description": {
+              "content": "Create the virtual Sponge Card after onboarding is approved and consent is accepted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "create-card"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billing\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"line2\": \"<string>\"\n  },\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"agentId\": \"<string>\",\n  \"shipping\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cde7e80c-d830-4231-8b6a-5bf255710a5d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "create-card"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billing\": {\n    \"line1\": \"123 Market St\",\n    \"city\": \"San Francisco\",\n    \"region\": \"CA\",\n    \"postal_code\": \"94105\",\n    \"country_code\": \"US\"\n  },\n  \"email\": \"jane@example.com\",\n  \"phone\": \"+14155550123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05fc44b4-27a9-4d3d-ab43-201c678bd775",
+          "name": "Get Sponge Card details",
+          "request": {
+            "name": "Get Sponge Card details",
+            "description": {
+              "content": "Fetch encrypted PAN/CVC for the user's Sponge Card plus a one-time secret_key for local decryption. Treat this response as sensitive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agentId",
+                  "value": "<string>",
+                  "description": "Required when not authenticating with an agent API key."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1dd90ba-8f21-470b-acb4-ab5fa252252e",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agentId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56c77d96-cfcb-42ef-9df4-7863b89f3148",
+          "name": "Fund Sponge Card collateral",
+          "request": {
+            "name": "Fund Sponge Card collateral",
+            "description": {
+              "content": "Top up Sponge Card collateral with USDC from the wallet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "fund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"chain\": \"<string>\",\n  \"agentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1f7c88c-b669-46aa-881f-1a7c3a3449b2",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "fund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"100.00\",\n  \"chain\": \"base\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7c0ea7b-25c4-498a-9223-6631ad8913d7",
+          "name": "Withdraw Sponge Card collateral",
+          "request": {
+            "name": "Withdraw Sponge Card collateral",
+            "description": {
+              "content": "Withdraw Sponge Card collateral back to the wallet, reducing card spending power.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "sponge-card",
+                "withdraw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"chain\": \"<string>\",\n  \"agentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5d96121-b984-4a42-8237-ddf54637e26c",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "sponge-card",
+                    "withdraw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"chain\": \"base\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wallet.paysponge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d49d23c3-ffab-4b67-a9ab-519709c984c7",
+    "name": "Sponge public Agents Sponge Card API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.",
+      "type": "text/plain"
+    }
+  }
+}

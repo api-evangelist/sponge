@@ -1,0 +1,1153 @@
+{
+  "item": [
+    {
+      "id": "a6f46d79-f3b0-4ba1-8127-fb3e508f526b",
+      "name": "Fiat",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac7626af-5327-48c7-a0de-31096bd2458d",
+          "name": "Create a crypto onramp quote",
+          "request": {
+            "name": "Create a crypto onramp quote",
+            "description": {
+              "content": "Create a crypto onramp quote via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "onramp",
+                "crypto"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "wallet_address",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "chain",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fiat_amount",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fiat_currency",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "lock_wallet_address",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "redirect_url",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "122a7495-a99a-4865-b8aa-f6473a0e4590",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "onramp",
+                    "crypto"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "wallet_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "provider",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "chain",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "fiat_amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "fiat_currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "lock_wallet_address",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "redirect_url",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d55a49b7-5538-4ad5-9285-d2a6f6ed1ca0",
+          "name": "Get Coinbase onramp status",
+          "request": {
+            "name": "Get Coinbase onramp status",
+            "description": {
+              "content": "Get Coinbase onramp status via GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "coinbase-onramp",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c50e38a-9046-4faa-abc6-a41af9603b71",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "coinbase-onramp",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a10e3123-ec74-434c-bd4c-76f36ac6e607",
+          "name": "List Coinbase onramp support",
+          "request": {
+            "name": "List Coinbase onramp support",
+            "description": {
+              "content": "List Coinbase onramp support via GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "coinbase-onramp",
+                "supported"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72121ed4-d634-4844-b924-ee1aa0e270cb",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "coinbase-onramp",
+                    "supported"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10df3cfd-f07b-43ec-b580-9578df6321d6",
+          "name": "Create a Coinbase onramp URL",
+          "request": {
+            "name": "Create a Coinbase onramp URL",
+            "description": {
+              "content": "Create a Coinbase onramp URL via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "coinbase-onramp",
+                "url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "addresses",
+                  "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "addresses",
+                  "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "defaultChainId",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "defaultAsset",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "presetFiatAmount",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fiatCurrency",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "redirectUrl",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "436ea9b2-b699-4cb3-b3d9-266c4d10b56d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "coinbase-onramp",
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "addresses",
+                      "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "addresses",
+                      "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "defaultChainId",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "defaultAsset",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "presetFiatAmount",
+                      "value": "<number>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "fiatCurrency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "redirectUrl",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c3a9fa0-0b22-4149-a416-6074957c9c18",
+          "name": "Get Coinbase session status",
+          "request": {
+            "name": "Get Coinbase session status",
+            "description": {
+              "content": "Get Coinbase session status via GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "coinbase-onramp",
+                "session",
+                ":sessionToken",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "079fe512-552e-4fc4-852e-08955cb2cc98",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "coinbase-onramp",
+                    "session",
+                    ":sessionToken",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5399cae1-e754-47af-a602-3daa06c5d255",
+          "name": "Abandon a Coinbase session",
+          "request": {
+            "name": "Abandon a Coinbase session",
+            "description": {
+              "content": "Abandon a Coinbase session via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "coinbase-onramp",
+                "session",
+                ":sessionToken",
+                "abandon"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionToken",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "981c37c7-e069-4995-9cc4-5beb5c2eab8b",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "coinbase-onramp",
+                    "session",
+                    ":sessionToken",
+                    "abandon"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionToken",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6030dd98-9a45-43ab-8f4f-5df24ac537bb",
+          "name": "Get Stripe onramp status",
+          "request": {
+            "name": "Get Stripe onramp status",
+            "description": {
+              "content": "Get Stripe onramp status via GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "stripe-onramp",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "373fe062-3eef-4b6f-a8ef-2c8882b39e03",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "stripe-onramp",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ce102e0-0c36-4284-9a99-0dd0ab5d09a0",
+          "name": "List Stripe onramp support",
+          "request": {
+            "name": "List Stripe onramp support",
+            "description": {
+              "content": "List Stripe onramp support via GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "stripe-onramp",
+                "supported"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "800eb19e-6a31-4379-84d2-a03813d403b1",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "stripe-onramp",
+                    "supported"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e8def93-7003-4697-8fb8-476f164984fa",
+          "name": "Create a Stripe onramp session",
+          "request": {
+            "name": "Create a Stripe onramp session",
+            "description": {
+              "content": "Create a Stripe onramp session via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "stripe-onramp",
+                "session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "addresses",
+                  "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "addresses",
+                  "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "lockWalletAddress",
+                  "value": "<boolean>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d6cec59b-ff5a-48bf-bc69-c4ad69dccba4",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "stripe-onramp",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "addresses",
+                      "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "addresses",
+                      "value": "{\"chainId\":\"<number>\",\"address\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "lockWalletAddress",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "847e4e08-63c9-410f-9194-f27c87498010",
+          "name": "Get Stripe session status",
+          "request": {
+            "name": "Get Stripe session status",
+            "description": {
+              "content": "Get Stripe session status via GET.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "stripe-onramp",
+                "session",
+                ":sessionId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d6acb29-9250-4b80-a9a7-ea77d5cea54f",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "stripe-onramp",
+                    "session",
+                    ":sessionId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "208be68f-3af6-427c-b308-81d447539b91",
+          "name": "Abandon a Stripe session",
+          "request": {
+            "name": "Abandon a Stripe session",
+            "description": {
+              "content": "Abandon a Stripe session via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "stripe-onramp",
+                "session",
+                ":sessionId",
+                "abandon"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8045414-4ee0-4c2c-a364-c52aac1d230f",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "stripe-onramp",
+                    "session",
+                    ":sessionId",
+                    "abandon"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wallet.paysponge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "70c79ba9-a2cb-4887-8a73-dd2a46ab4b8c",
+    "name": "Sponge public Agents Fiat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.",
+      "type": "text/plain"
+    }
+  }
+}

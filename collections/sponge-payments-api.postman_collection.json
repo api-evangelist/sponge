@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "5a360cd6-eb3a-441f-ace0-388667779bcb",
+      "name": "Payments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04f03151-07a3-41a3-ac97-be04667b7c45",
+          "name": "Fetch with x402 auto-pay",
+          "request": {
+            "name": "Fetch with x402 auto-pay",
+            "description": {
+              "content": "Fetch with x402 auto-pay via POST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "x402",
+                "fetch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e7b95c0f-f764-47cb-a6f2-214c7a3e6bf0",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "x402",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wallet.paysponge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f904118b-3745-48ac-a398-6322d2703ce8",
+    "name": "Sponge public Agents Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.",
+      "type": "text/plain"
+    }
+  }
+}

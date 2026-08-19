@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/agents/me"
+          },
+          "docs": "Get current agent via GET."
+        },
+        {
+          "info": {
+            "name": "List or create agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/agents/",
+            "params": [
+              {
+                "name": "includeBalances",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List or create agents via GET."
+        },
+        {
+          "info": {
+            "name": "List or create agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/agents/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List or create agents via POST."
+        },
+        {
+          "info": {
+            "name": "Get, update, or delete an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "includeBalances",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get, update, or delete an agent via GET."
+        },
+        {
+          "info": {
+            "name": "Get, update, or delete an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get, update, or delete an agent via PUT."
+        },
+        {
+          "info": {
+            "name": "Get, update, or delete an agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get, update, or delete an agent via DELETE."
+        },
+        {
+          "info": {
+            "name": "Get agent API key metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id/api-key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get agent API key metadata via GET."
+        },
+        {
+          "info": {
+            "name": "Regenerate an agent API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.wallet.paysponge.com/api/agents/:id/regenerate-key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Regenerate an agent API key via POST."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,725 @@
+{
+  "item": [
+    {
+      "id": "aae7ce90-f7ce-4504-97f2-f1c6a9ab37b5",
+      "name": "Cards",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "46e3f665-85b6-4cf7-b63e-e0c9b41ac391",
+          "name": "Store a credit card",
+          "request": {
+            "name": "Store a credit card",
+            "description": {
+              "content": "Store card details as an encrypted agent payment method for checkout. Prefer dashboard tokenization when possible; use this endpoint only for trusted agent flows that already have the user's card details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "credit-cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_number\": \"<string>\",\n  \"cvc\": \"<string>\",\n  \"cardholder_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"billing_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"line2\": \"<string>\"\n  },\n  \"expiry_month\": \"<string>\",\n  \"expiry_year\": \"<string>\",\n  \"expiration\": \"<string>\",\n  \"label\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 2211.103629252463\n  },\n  \"agentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf6a14a3-1fc6-484f-b69b-1b28d40dfeb5",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "credit-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_number\": \"4111111111111111\",\n  \"expiration\": \"12/2030\",\n  \"cvc\": \"123\",\n  \"cardholder_name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\",\n  \"billing_address\": {\n    \"line1\": \"123 Market St\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94105\",\n    \"country\": \"US\"\n  },\n  \"shipping_address\": {\n    \"line1\": \"123 Market St\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94105\",\n    \"country\": \"US\",\n    \"phone\": \"+14155550123\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c3149e8-dc84-47ba-a120-9ac9642ec185",
+          "name": "List stored credit card payment methods",
+          "request": {
+            "name": "List stored credit card payment methods",
+            "description": {
+              "content": "List saved credit card payment methods for the agent, including the default payment method. Raw card numbers and CVCs are not returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "credit-cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agentId",
+                  "value": "<string>",
+                  "description": "Required when not authenticating with an agent API key."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b39dffad-d231-4953-9fdc-0d49547cc6db",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "credit-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agentId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0912b0c-bf4f-4632-beee-005a6a13437f",
+          "name": "Connect or save a Link payment method",
+          "request": {
+            "name": "Connect or save a Link payment method",
+            "description": {
+              "content": "Start Link setup, or save a selected Link payment method with contact and shipping data after the user completes Link.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "agents",
+                ":id",
+                "link-payment-methods",
+                "link"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"linkPaymentMethodId\": \"<string>\",\n  \"setAsDefault\": \"<boolean>\",\n  \"clientName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5a6b7b3-d215-4a3d-8f05-ac00fe891bd9",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "agents",
+                    ":id",
+                    "link-payment-methods",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": \"Checkout\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0d32f8e-333e-45f2-8b41-eff9b160032b",
+          "name": "Create a Link payment credential",
+          "request": {
+            "name": "Create a Link payment credential",
+            "description": {
+              "content": "Generate a one-time card credential from a saved Link payment method for a specific merchant and amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "agents",
+                ":id",
+                "link-payment-methods",
+                "credential"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"linkPaymentMethodId\": \"<string>\",\n  \"spendRequestId\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"merchantName\": \"<string>\",\n  \"merchantUrl\": \"<string>\",\n  \"context\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96a4023d-e173-4eb3-be3b-7f37efeb691e",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "agents",
+                    ":id",
+                    "link-payment-methods",
+                    "credential"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"linkPaymentMethodId\": \"lpm_123\",\n  \"amount\": \"25.00\",\n  \"currency\": \"USD\",\n  \"merchantName\": \"Example\",\n  \"merchantUrl\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a18bd59e-90ff-4803-916d-c6de4d276452",
+          "name": "Get a checkout card",
+          "request": {
+            "name": "Get a checkout card",
+            "description": {
+              "content": "Fetch a usable checkout card from Sponge Card or a vaulted card source. If more than one card source is available, the API can return a selection response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_type\": \"<string>\",\n  \"payment_method_id\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"merchant_name\": \"<string>\",\n  \"merchant_url\": \"<string>\",\n  \"agentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ac6730bf-32f9-4e01-b96a-1fcbb63d5be3",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_type\": \"sponge_card\",\n  \"amount\": \"25.00\",\n  \"currency\": \"USD\",\n  \"merchant_name\": \"Example\",\n  \"merchant_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "508ce226-225e-4a39-b539-7289d359a522",
+          "name": "Issue a virtual card",
+          "request": {
+            "name": "Issue a virtual card",
+            "description": {
+              "content": "Issue a per-transaction virtual card for a specific merchant and amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "virtual-cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"merchant_name\": \"<string>\",\n  \"merchant_url\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"merchant_country_code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"products\": [\n    {\n      \"name\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<number>\"\n    }\n  ],\n  \"shipping_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country_code\": \"<string>\"\n  },\n  \"enrollment_id\": \"<string>\",\n  \"agentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17c7e383-60c9-43be-817d-36a47040b0a0",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "virtual-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USD\",\n  \"merchant_name\": \"Example\",\n  \"merchant_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44fb5af4-9794-455f-a68d-0635fc4fbfa6",
+          "name": "Report card usage",
+          "request": {
+            "name": "Report card usage",
+            "description": {
+              "content": "Report the outcome of a purchase attempt that used a stored or vaulted card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "card-usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_method_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"merchant_name\": \"<string>\",\n  \"merchant_domain\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"failure_reason\": \"<string>\",\n  \"agentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c653a69-25d6-4f20-9cd9-e02798f98c4d",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "card-usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method_id\": \"pm_123\",\n  \"status\": \"success\",\n  \"amount\": \"25.00\",\n  \"currency\": \"USD\",\n  \"merchant_name\": \"Example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wallet.paysponge.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7835204c-ac9b-4eb7-b75c-85fc5cd12553",
+    "name": "Sponge public Agents Cards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sponge public Agents Wallet API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get detailed balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/balances",
+            "params": [
+              {
+                "name": "chain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "allowedChains",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "onlyUsdc",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get detailed balances via GET."
+        },
+        {
+          "info": {
+            "name": "List wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/wallets/",
+            "params": [
+              {
+                "name": "includeBalances",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List wallets via GET."
+        },
+        {
+          "info": {
+            "name": "Get wallet details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/wallets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get wallet details via GET."
+        },
+        {
+          "info": {
+            "name": "Get wallet balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wallet.paysponge.com/api/wallets/:id/balance",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get wallet balance via GET."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
