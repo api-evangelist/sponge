@@ -43,6 +43,21 @@ tags:
 - MCP
 - Fintech
 - Cards
+- On-Ramp
+tags_raw:
+- Company
+- Agent Payments
+- AI Agents
+- Wallets
+- Cryptocurrency
+- Payments
+- Stablecoins
+- x402
+- MPP
+- Financial Infrastructure
+- MCP
+- Fintech
+- Cards
 - Onramp
 created: '2026-07-17'
 modified: '2026-07-21'
@@ -166,6 +181,8 @@ apis:
   humanURL: https://docs.paysponge.com
   baseURL: https://api.wallet.paysponge.com
   tags:
+  - Wallets
+  tags_raw:
   - Wallet
   properties:
   - type: OpenAPI
