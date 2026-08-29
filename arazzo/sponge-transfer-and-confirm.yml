@@ -4,8 +4,11 @@ info:
   version: 1.0.0
   summary: Read wallet balances, send an EVM transfer, then poll transaction status.
 sourceDescriptions:
-- name: sponge
-  url: ../openapi/sponge-openapi-original.json
+- name: transfersApi
+  url: ../openapi/sponge-transfers-api-openapi.yml
+  type: openapi
+- name: walletApi
+  url: ../openapi/sponge-wallet-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: transferAndConfirm
@@ -13,9 +16,9 @@ workflows:
   inputs:
     type: object
     properties:
-      to: { type: string }
-      amount: { type: string }
-      chain: { type: string }
+      to: {type: string}
+      amount: {type: string}
+      chain: {type: string}
   steps:
   - stepId: checkBalances
     operationId: getApiBalances

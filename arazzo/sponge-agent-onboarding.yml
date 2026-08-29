@@ -4,8 +4,11 @@ info:
   version: 1.0.0
   summary: Platform backend creates a new agent, then mints an agent API key for runtime use.
 sourceDescriptions:
-- name: sponge
-  url: ../openapi/sponge-openapi-original.json
+- name: agentsApi
+  url: ../openapi/sponge-agents-api-openapi.yml
+  type: openapi
+- name: secretsApi
+  url: ../openapi/sponge-secrets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: createAgentAndKey
@@ -13,7 +16,7 @@ workflows:
   inputs:
     type: object
     properties:
-      name: { type: string }
+      name: {type: string}
   steps:
   - stepId: createAgent
     operationId: postApiAgents
