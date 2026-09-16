@@ -1,15 +1,12 @@
 aid: sponge
 name: Sponge
-description: >-
-  Sponge builds financial infrastructure for the agent economy — wallets that let
-  AI agents hold and spend money, and a gateway that lets businesses sell services
-  directly to agents. The Sponge Wallet API gives an agent its own multi-chain
-  crypto wallet with balances, transfers, swaps, cross-chain bridges, payment
-  links, cards (including a Rain-issued Visa Sponge Card), fiat onramps (Coinbase,
-  Stripe), and trading on Hyperliquid and Polymarket, plus paid access to external
-  services via the x402 and MPP agent-payment protocols. A TypeScript and Python
-  SDK, a spongewallet CLI, and hosted MCP servers ship first-party. Backed by
-  Y Combinator (W2026).
+description: Sponge builds financial infrastructure for the agent economy — wallets that let AI agents
+  hold and spend money, and a gateway that lets businesses sell services directly to agents. The Sponge
+  Wallet API gives an agent its own multi-chain crypto wallet with balances, transfers, swaps, cross-chain
+  bridges, payment links, cards (including a Rain-issued Visa Sponge Card), fiat onramps (Coinbase, Stripe),
+  and trading on Hyperliquid and Polymarket, plus paid access to external services via the x402 and MPP
+  agent-payment protocols. A TypeScript and Python SDK, a spongewallet CLI, and hosted MCP servers ship
+  first-party. Backed by Y Combinator (W2026).
 url: https://raw.githubusercontent.com/api-evangelist/sponge/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -72,7 +69,7 @@ tags_raw:
 - Cards
 - Onramp
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -152,7 +149,7 @@ apis:
   - type: APIReference
     url: https://docs.paysponge.com/api-reference/public-openapi.json
 - aid: sponge:sponge-sponge-card-api
-  name: Sponge Sponge Card API
+  name: Sponge Card API
   description: The Sponge Card API from Sponge — 7 operation(s) for sponge card.
   humanURL: https://docs.paysponge.com
   baseURL: https://api.wallet.paysponge.com
