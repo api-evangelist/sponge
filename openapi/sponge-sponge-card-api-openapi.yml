@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Sponge public Agents Sponge Card API
+  title: Sponge public Sponge Card API
   version: 1.0.0
   description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
 servers:
@@ -155,36 +155,6 @@ paths:
           description: Successful response.
 components:
   schemas:
-    SpongeCardShippingAddress:
-      allOf:
-      - $ref: '#/components/schemas/SpongeCardAddress'
-      - type: object
-        properties:
-          first_name:
-            type: string
-          last_name:
-            type: string
-    SpongeCardTermsRequest:
-      type: object
-      required:
-      - e_sign_consent
-      - sponge_card_terms
-      - information_certification
-      - unauthorized_solicitation_acknowledgement
-      properties:
-        agentId:
-          type: string
-          description: Required when not authenticating with an agent API key.
-        e_sign_consent:
-          type: boolean
-        account_opening_privacy_notice:
-          type: boolean
-        sponge_card_terms:
-          type: boolean
-        information_certification:
-          type: boolean
-        unauthorized_solicitation_acknowledgement:
-          type: boolean
     CreateSpongeCardRequest:
       type: object
       required:
@@ -203,16 +173,17 @@ components:
           type: string
         shipping:
           $ref: '#/components/schemas/SpongeCardShippingAddress'
-    SpongeCardOnboardRequest:
+    SpongeCardTermsRequest:
       type: object
+      required:
+      - e_sign_consent
+      - sponge_card_terms
+      - information_certification
+      - unauthorized_solicitation_acknowledgement
       properties:
         agentId:
           type: string
           description: Required when not authenticating with an agent API key.
-        occupation:
-          type: string
-        redirect_uri:
-          type: string
         e_sign_consent:
           type: boolean
         account_opening_privacy_notice:
@@ -244,6 +215,35 @@ components:
           type: string
         country_code:
           type: string
+    SpongeCardOnboardRequest:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+        occupation:
+          type: string
+        redirect_uri:
+          type: string
+        e_sign_consent:
+          type: boolean
+        account_opening_privacy_notice:
+          type: boolean
+        sponge_card_terms:
+          type: boolean
+        information_certification:
+          type: boolean
+        unauthorized_solicitation_acknowledgement:
+          type: boolean
+    SpongeCardShippingAddress:
+      allOf:
+      - $ref: '#/components/schemas/SpongeCardAddress'
+      - type: object
+        properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
     SpongeCardAmountRequest:
       type: object
       required:

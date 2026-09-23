@@ -1,16 +1,7 @@
 {
   "provider": "sponge",
   "sources": [
-    "sponge-agents-api-openapi.yml",
-    "sponge-cards-api-openapi.yml",
-    "sponge-fiat-api-openapi.yml",
-    "sponge-mpp-api-openapi.yml",
-    "sponge-payments-api-openapi.yml",
-    "sponge-secrets-api-openapi.yml",
-    "sponge-sponge-card-api-openapi.yml",
-    "sponge-trading-api-openapi.yml",
-    "sponge-transfers-api-openapi.yml",
-    "sponge-wallet-api-openapi.yml"
+    "_original/sponge-openapi-original.json"
   ],
   "outputs": [
     "sponge-agents-api-openapi.yml",
@@ -27,6 +18,31 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sponge-openapi-original.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sponge-openapi-original.json: declared missing tag: Agents",
+    "sponge-openapi-original.json: declared missing tag: Cards",
+    "sponge-openapi-original.json: declared missing tag: Fiat",
+    "sponge-openapi-original.json: declared missing tag: MPP",
+    "sponge-openapi-original.json: declared missing tag: Payments",
+    "sponge-openapi-original.json: declared missing tag: Secrets",
+    "sponge-openapi-original.json: declared missing tag: Sponge Card",
+    "sponge-openapi-original.json: declared missing tag: Trading",
+    "sponge-openapi-original.json: declared missing tag: Transfers",
+    "sponge-openapi-original.json: declared missing tag: Wallet",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sponge-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-fiat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-mpp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-secrets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-sponge-card-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-trading-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sponge-wallet-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

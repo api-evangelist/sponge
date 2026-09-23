@@ -1,33 +1,59 @@
-generated: '2026-07-21'
+generated: '2026-09-19'
 method: searched
-description: >-
-  Well-known discovery documents found across Sponge hosts. The Wallet API host
-  exposes full OAuth 2.0 / OIDC authorization-server metadata (backing the MCP
-  OAuth flow); the Gateway API host exposes its own OAuth server metadata; the
-  docs host publishes an RFC 9727 api-catalog linkset pointing at the OpenAPI spec.
-documents:
+description: Well-known discovery documents found across Sponge hosts. The Wallet API host exposes full
+  OAuth 2.0 / OIDC authorization-server metadata (backing the MCP OAuth flow); the Gateway API host exposes
+  its own OAuth server metadata; the docs host publishes an RFC 9727 api-catalog linkset pointing at the
+  OpenAPI spec.
+hosts:
+- host: ''
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: sponge-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: sponge-oauth-authorization-server.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: sponge-gateway-oauth-authorization-server.json
+  - path: /.well-known/api-catalog
+    status: 200
+    file: sponge-api-catalog.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
 - host: https://api.wallet.paysponge.com
-  path: /.well-known/openid-configuration
-  status: 200
-  file: sponge-openid-configuration.json
-- host: https://api.wallet.paysponge.com
-  path: /.well-known/oauth-authorization-server
-  status: 200
-  file: sponge-oauth-authorization-server.json
-- host: https://api.paysponge.com
-  path: /.well-known/oauth-authorization-server
-  status: 200
-  file: sponge-gateway-oauth-authorization-server.json
-- host: https://docs.paysponge.com
-  path: /.well-known/api-catalog
-  status: 200
-  file: sponge-api-catalog.json
-- host: https://api.wallet.paysponge.com
-  path: /.well-known/security.txt
-  status: 404
-- host: https://paysponge.com
-  path: /.well-known/security.txt
-  status: 404
-- host: https://api.wallet.paysponge.com
-  path: /.well-known/ai-plugin.json
-  status: 404
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: sponge-api-oauth-protected-resource.json
+    bytes: 251
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: sponge-api-oauth-authorization-server.json
+    bytes: 752
+  path_echo_control: passed
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://api.wallet.paysponge.com
+    path: /.well-known/oauth-protected-resource
+    file: sponge-api-oauth-protected-resource.json
+  - host: https://api.wallet.paysponge.com
+    path: /.well-known/oauth-authorization-server
+    file: sponge-api-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Sponge public Agents Cards API
+  title: Sponge public Cards API
   version: 1.0.0
   description: Public REST endpoints for agents, wallets, transfers, payments, cards, MPP, trading, and fiat onramps.
 servers:
@@ -183,6 +183,117 @@ paths:
           description: Successful response.
 components:
   schemas:
+    CardBillingAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - state
+      - postal_code
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+    LinkPaymentMethodRequest:
+      type: object
+      properties:
+        linkPaymentMethodId:
+          type: string
+          description: Link payment method ID. Required when multiple methods are available.
+        setAsDefault:
+          type: boolean
+        clientName:
+          type: string
+        email:
+          type: string
+          description: Required when saving the method.
+        phone:
+          type: string
+          description: Required when saving the method.
+        billing:
+          $ref: '#/components/schemas/LinkAddress'
+        shipping:
+          $ref: '#/components/schemas/LinkAddress'
+    VirtualCardShippingAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - state
+      - postal_code
+      - country_code
+      properties:
+        line1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country_code:
+          type: string
+    ReportCardUsageRequest:
+      type: object
+      required:
+      - payment_method_id
+      - status
+      properties:
+        payment_method_id:
+          type: string
+        merchant_name:
+          type: string
+        merchant_domain:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - success
+          - failed
+          - cancelled
+        failure_reason:
+          type: string
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+    LinkAddress:
+      type: object
+      required:
+      - name
+      - line1
+      - city
+      - state
+      - postalCode
+      - country
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
     IssueVirtualCardRequest:
       type: object
       required:
@@ -214,27 +325,6 @@ components:
         agentId:
           type: string
           description: Required when not authenticating with an agent API key.
-    LinkPaymentCredentialRequest:
-      type: object
-      properties:
-        linkPaymentMethodId:
-          type: string
-          description: Saved Sponge or Link payment method ID.
-        spendRequestId:
-          type: string
-          description: Spend request ID returned by a previous approval_required response.
-        amount:
-          type: string
-          description: Purchase amount, for example 49.99.
-        currency:
-          type: string
-          description: ISO 4217 currency code. Defaults to USD.
-        merchantName:
-          type: string
-        merchantUrl:
-          type: string
-        context:
-          type: string
     CardShippingAddress:
       type: object
       required:
@@ -259,53 +349,40 @@ components:
           type: string
         phone:
           type: string
-    ReportCardUsageRequest:
+    ProductLineItem:
       type: object
       required:
-      - payment_method_id
-      - status
+      - name
+      - price
+      - quantity
       properties:
-        payment_method_id:
+        name:
           type: string
-        merchant_name:
-          type: string
-        merchant_domain:
-          type: string
-        amount:
-          type: string
-        currency:
-          type: string
-        status:
-          type: string
-          enum:
-          - success
-          - failed
-          - cancelled
-        failure_reason:
-          type: string
-        agentId:
-          type: string
-          description: Required when not authenticating with an agent API key.
-    LinkPaymentMethodRequest:
+        price:
+          type: number
+        quantity:
+          type: number
+    LinkPaymentCredentialRequest:
       type: object
       properties:
         linkPaymentMethodId:
           type: string
-          description: Link payment method ID. Required when multiple methods are available.
-        setAsDefault:
-          type: boolean
-        clientName:
+          description: Saved Sponge or Link payment method ID.
+        spendRequestId:
           type: string
-        email:
+          description: Spend request ID returned by a previous approval_required response.
+        amount:
           type: string
-          description: Required when saving the method.
-        phone:
+          description: Purchase amount, for example 49.99.
+        currency:
           type: string
-          description: Required when saving the method.
-        billing:
-          $ref: '#/components/schemas/LinkAddress'
-        shipping:
-          $ref: '#/components/schemas/LinkAddress'
+          description: ISO 4217 currency code. Defaults to USD.
+        merchantName:
+          type: string
+        merchantUrl:
+          type: string
+        context:
+          type: string
     StoreCreditCardRequest:
       type: object
       required:
@@ -347,27 +424,6 @@ components:
         agentId:
           type: string
           description: Required when not authenticating with an agent API key.
-    CardBillingAddress:
-      type: object
-      required:
-      - line1
-      - city
-      - state
-      - postal_code
-      - country
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-        country:
-          type: string
     GetCardRequest:
       type: object
       properties:
@@ -389,62 +445,6 @@ components:
         agentId:
           type: string
           description: Required when not authenticating with an agent API key.
-    LinkAddress:
-      type: object
-      required:
-      - name
-      - line1
-      - city
-      - state
-      - postalCode
-      - country
-      properties:
-        name:
-          type: string
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
-    VirtualCardShippingAddress:
-      type: object
-      required:
-      - line1
-      - city
-      - state
-      - postal_code
-      - country_code
-      properties:
-        line1:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-        country_code:
-          type: string
-    ProductLineItem:
-      type: object
-      required:
-      - name
-      - price
-      - quantity
-      properties:
-        name:
-          type: string
-        price:
-          type: number
-        quantity:
-          type: number
   securitySchemes:
     bearerAuth:
       type: http

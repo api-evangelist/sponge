@@ -1,0 +1,1 @@
+{"resource":"https://api.wallet.paysponge.com/mcp","authorization_servers":["https://api.wallet.paysponge.com"],"scopes_supported":["mcp:tools","wallet:read","wallet:transfer","sponge:all"],"resource_documentation":"https://spongewallet.com/docs/mcp"}
