@@ -183,7 +183,65 @@ paths:
           description: Successful response.
 components:
   schemas:
-    CardBillingAddress:
+    GetCardRequest:
+      type: object
+      properties:
+        card_type:
+          type: string
+          enum:
+          - sponge_card
+          - basis_theory_vaulted
+        payment_method_id:
+          type: string
+        amount:
+          type: string
+        currency:
+          type: string
+        merchant_name:
+          type: string
+        merchant_url:
+          type: string
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+    ProductLineItem:
+      type: object
+      required:
+      - name
+      - price
+      - quantity
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        quantity:
+          type: number
+    LinkAddress:
+      type: object
+      required:
+      - name
+      - line1
+      - city
+      - state
+      - postalCode
+      - country
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+    CardShippingAddress:
       type: object
       required:
       - line1
@@ -191,6 +249,7 @@ components:
       - state
       - postal_code
       - country
+      - phone
       properties:
         line1:
           type: string
@@ -204,26 +263,39 @@ components:
           type: string
         country:
           type: string
-    LinkPaymentMethodRequest:
-      type: object
-      properties:
-        linkPaymentMethodId:
-          type: string
-          description: Link payment method ID. Required when multiple methods are available.
-        setAsDefault:
-          type: boolean
-        clientName:
-          type: string
-        email:
-          type: string
-          description: Required when saving the method.
         phone:
           type: string
-          description: Required when saving the method.
-        billing:
-          $ref: '#/components/schemas/LinkAddress'
-        shipping:
-          $ref: '#/components/schemas/LinkAddress'
+    IssueVirtualCardRequest:
+      type: object
+      required:
+      - amount
+      - merchant_name
+      - merchant_url
+      properties:
+        amount:
+          type: string
+        currency:
+          type: string
+          description: ISO 4217 currency code. Defaults to USD.
+        merchant_name:
+          type: string
+        merchant_url:
+          type: string
+        merchant_country_code:
+          type: string
+        description:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductLineItem'
+        shipping_address:
+          $ref: '#/components/schemas/VirtualCardShippingAddress'
+        enrollment_id:
+          type: string
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
     VirtualCardShippingAddress:
       type: object
       required:
@@ -270,119 +342,6 @@ components:
         agentId:
           type: string
           description: Required when not authenticating with an agent API key.
-    LinkAddress:
-      type: object
-      required:
-      - name
-      - line1
-      - city
-      - state
-      - postalCode
-      - country
-      properties:
-        name:
-          type: string
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postalCode:
-          type: string
-        country:
-          type: string
-    IssueVirtualCardRequest:
-      type: object
-      required:
-      - amount
-      - merchant_name
-      - merchant_url
-      properties:
-        amount:
-          type: string
-        currency:
-          type: string
-          description: ISO 4217 currency code. Defaults to USD.
-        merchant_name:
-          type: string
-        merchant_url:
-          type: string
-        merchant_country_code:
-          type: string
-        description:
-          type: string
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductLineItem'
-        shipping_address:
-          $ref: '#/components/schemas/VirtualCardShippingAddress'
-        enrollment_id:
-          type: string
-        agentId:
-          type: string
-          description: Required when not authenticating with an agent API key.
-    CardShippingAddress:
-      type: object
-      required:
-      - line1
-      - city
-      - state
-      - postal_code
-      - country
-      - phone
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-        country:
-          type: string
-        phone:
-          type: string
-    ProductLineItem:
-      type: object
-      required:
-      - name
-      - price
-      - quantity
-      properties:
-        name:
-          type: string
-        price:
-          type: number
-        quantity:
-          type: number
-    LinkPaymentCredentialRequest:
-      type: object
-      properties:
-        linkPaymentMethodId:
-          type: string
-          description: Saved Sponge or Link payment method ID.
-        spendRequestId:
-          type: string
-          description: Spend request ID returned by a previous approval_required response.
-        amount:
-          type: string
-          description: Purchase amount, for example 49.99.
-        currency:
-          type: string
-          description: ISO 4217 currency code. Defaults to USD.
-        merchantName:
-          type: string
-        merchantUrl:
-          type: string
-        context:
-          type: string
     StoreCreditCardRequest:
       type: object
       required:
@@ -424,27 +383,68 @@ components:
         agentId:
           type: string
           description: Required when not authenticating with an agent API key.
-    GetCardRequest:
+    CardBillingAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - state
+      - postal_code
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+    LinkPaymentCredentialRequest:
       type: object
       properties:
-        card_type:
+        linkPaymentMethodId:
           type: string
-          enum:
-          - sponge_card
-          - basis_theory_vaulted
-        payment_method_id:
+          description: Saved Sponge or Link payment method ID.
+        spendRequestId:
           type: string
+          description: Spend request ID returned by a previous approval_required response.
         amount:
           type: string
+          description: Purchase amount, for example 49.99.
         currency:
           type: string
-        merchant_name:
+          description: ISO 4217 currency code. Defaults to USD.
+        merchantName:
           type: string
-        merchant_url:
+        merchantUrl:
           type: string
-        agentId:
+        context:
           type: string
-          description: Required when not authenticating with an agent API key.
+    LinkPaymentMethodRequest:
+      type: object
+      properties:
+        linkPaymentMethodId:
+          type: string
+          description: Link payment method ID. Required when multiple methods are available.
+        setAsDefault:
+          type: boolean
+        clientName:
+          type: string
+        email:
+          type: string
+          description: Required when saving the method.
+        phone:
+          type: string
+          description: Required when saving the method.
+        billing:
+          $ref: '#/components/schemas/LinkAddress'
+        shipping:
+          $ref: '#/components/schemas/LinkAddress'
   securitySchemes:
     bearerAuth:
       type: http
