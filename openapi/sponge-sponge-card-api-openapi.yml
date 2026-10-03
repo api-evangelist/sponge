@@ -155,56 +155,6 @@ paths:
           description: Successful response.
 components:
   schemas:
-    SpongeCardShippingAddress:
-      allOf:
-      - $ref: '#/components/schemas/SpongeCardAddress'
-      - type: object
-        properties:
-          first_name:
-            type: string
-          last_name:
-            type: string
-    SpongeCardAddress:
-      type: object
-      required:
-      - line1
-      - city
-      - region
-      - postal_code
-      - country_code
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-        city:
-          type: string
-        region:
-          type: string
-        postal_code:
-          type: string
-        country_code:
-          type: string
-    SpongeCardOnboardRequest:
-      type: object
-      properties:
-        agentId:
-          type: string
-          description: Required when not authenticating with an agent API key.
-        occupation:
-          type: string
-        redirect_uri:
-          type: string
-        e_sign_consent:
-          type: boolean
-        account_opening_privacy_notice:
-          type: boolean
-        sponge_card_terms:
-          type: boolean
-        information_certification:
-          type: boolean
-        unauthorized_solicitation_acknowledgement:
-          type: boolean
     SpongeCardAmountRequest:
       type: object
       required:
@@ -237,6 +187,15 @@ components:
           type: string
         shipping:
           $ref: '#/components/schemas/SpongeCardShippingAddress'
+    SpongeCardShippingAddress:
+      allOf:
+      - $ref: '#/components/schemas/SpongeCardAddress'
+      - type: object
+        properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
     SpongeCardTermsRequest:
       type: object
       required:
@@ -258,6 +217,47 @@ components:
           type: boolean
         unauthorized_solicitation_acknowledgement:
           type: boolean
+    SpongeCardOnboardRequest:
+      type: object
+      properties:
+        agentId:
+          type: string
+          description: Required when not authenticating with an agent API key.
+        occupation:
+          type: string
+        redirect_uri:
+          type: string
+        e_sign_consent:
+          type: boolean
+        account_opening_privacy_notice:
+          type: boolean
+        sponge_card_terms:
+          type: boolean
+        information_certification:
+          type: boolean
+        unauthorized_solicitation_acknowledgement:
+          type: boolean
+    SpongeCardAddress:
+      type: object
+      required:
+      - line1
+      - city
+      - region
+      - postal_code
+      - country_code
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+        city:
+          type: string
+        region:
+          type: string
+        postal_code:
+          type: string
+        country_code:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http
