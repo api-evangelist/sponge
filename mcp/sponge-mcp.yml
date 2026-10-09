@@ -65,3 +65,20 @@ deployment:
   probe: gated
   checked: '2026-08-12'
   source: catalog MCP census
+rfc9728:
+  endpoint: https://api.wallet.paysponge.com/mcp
+  metadata_url: https://api.wallet.paysponge.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://api.wallet.paysponge.com/mcp
+    authorization_servers:
+    - https://api.wallet.paysponge.com
+    scopes_supported:
+    - mcp:tools
+    - wallet:read
+    - wallet:transfer
+    - sponge:all
+    resource_documentation: https://spongewallet.com/docs/mcp

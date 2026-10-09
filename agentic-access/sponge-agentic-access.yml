@@ -1,18 +1,21 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/sponge-openapi-original.json
+source: openapi/sponge-agents-api-openapi.yml, openapi/sponge-cards-api-openapi.yml, openapi/sponge-fiat-api-openapi.yml,
+  openapi/sponge-mpp-api-openapi.yml, openapi/sponge-payments-api-openapi.yml, openapi/sponge-secrets-api-openapi.yml,
+  openapi/sponge-sponge-card-api-openapi.yml, openapi/sponge-trading-api-openapi.yml, openapi/sponge-transfers-api-openapi.yml,
+  openapi/sponge-wallet-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 57
   by_action_class:
-    connected: 24
-    acting: 33
+    connected: 26
+    acting: 31
   by_consequence:
-    read: 24
-    write: 21
-    physical: 12
+    read: 26
+    write: 20
+    physical: 11
   human_in_the_loop_required: 0
 operations:
 - path: /api/agents/me
@@ -119,49 +122,35 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/balances
-  method: get
-  operationId: getApiBalances
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/wallets/
-  method: get
-  operationId: getApiWallets
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/wallets/{id}
-  method: get
-  operationId: getApiWalletsById
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/wallets/{id}/balance
-  method: get
-  operationId: getApiWalletsByIdBalance
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/transfers/evm
+- path: /api/credit-cards
   method: post
-  operationId: postApiTransfersEvm
+  operationId: postApiCreditCards
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/credit-cards
+  method: get
+  operationId: getApiCreditCards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/agents/{id}/link-payment-methods/link
+  method: post
+  operationId: postApiAgentsIdLinkPaymentMethodsLink
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -177,9 +166,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/transfers/solana
+- path: /api/agents/{id}/link-payment-methods/credential
   method: post
-  operationId: postApiTransfersSolana
+  operationId: postApiAgentsIdLinkPaymentMethodsCredential
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -195,49 +184,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/solana/tokens
-  method: get
-  operationId: getApiSolanaTokens
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/solana/tokens/search
-  method: get
-  operationId: getApiSolanaTokensSearch
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/transactions/history
-  method: get
-  operationId: getApiTransactionsHistory
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/transactions/status/{txHash}
-  method: get
-  operationId: getApiTransactionsStatusByTxHash
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/transactions/swap
+- path: /api/cards
   method: post
-  operationId: postApiTransactionsSwap
+  operationId: postApiCards
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -253,72 +202,32 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/transactions/base-swap
+- path: /api/virtual-cards
   method: post
-  operationId: postApiTransactionsBase-swap
+  operationId: postApiVirtualCards
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/transactions/bridge
+- path: /api/card-usage
   method: post
-  operationId: postApiTransactionsBridge
+  operationId: postApiCardUsage
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/x402/fetch
-  method: post
-  operationId: postApiX402Fetch
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/hyperliquid
-  method: post
-  operationId: postApiHyperliquid
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -469,18 +378,12 @@ operations:
   method: post
   operationId: postApiMppFetch
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /api/mpp/session/start
   method: post
   operationId: postApiMppSessionStart
@@ -541,25 +444,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/credit-cards
+- path: /api/x402/fetch
   method: post
-  operationId: postApiCreditCards
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/credit-cards
-  method: get
-  operationId: getApiCreditCards
+  operationId: postApiX402Fetch
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -567,63 +454,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/agents/{id}/link-payment-methods/link
+- path: /api/agent-keys
   method: post
-  operationId: postApiAgentsIdLinkPaymentMethodsLink
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/agents/{id}/link-payment-methods/credential
-  method: post
-  operationId: postApiAgentsIdLinkPaymentMethodsCredential
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/cards
-  method: post
-  operationId: postApiCards
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/virtual-cards
-  method: post
-  operationId: postApiVirtualCards
+  operationId: postApiAgentKeys
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -637,9 +470,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/card-usage
-  method: post
-  operationId: postApiCardUsage
+- path: /api/agent-keys
+  method: get
+  operationId: getApiAgentKeys
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/agent-keys
+  method: delete
+  operationId: deleteApiAgentKeys
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -653,6 +496,16 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /api/agent-keys/value
+  method: get
+  operationId: getApiAgentKeysValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/sponge-card/status
   method: get
   operationId: getApiSpongeCardStatus
@@ -755,25 +608,63 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/agent-keys
+- path: /api/hyperliquid
   method: post
-  operationId: postApiAgentKeys
+  operationId: postApiHyperliquid
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/agent-keys
+- path: /api/transfers/evm
+  method: post
+  operationId: postApiTransfersEvm
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/transfers/solana
+  method: post
+  operationId: postApiTransfersSolana
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/solana/tokens
   method: get
-  operationId: getApiAgentKeys
+  operationId: getApiSolanaTokens
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -781,25 +672,123 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/agent-keys
-  method: delete
-  operationId: deleteApiAgentKeys
+- path: /api/solana/tokens/search
+  method: get
+  operationId: getApiSolanaTokensSearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/transactions/history
+  method: get
+  operationId: getApiTransactionsHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/transactions/status/{txHash}
+  method: get
+  operationId: getApiTransactionsStatusByTxHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/transactions/swap
+  method: post
+  operationId: postApiTransactionsSwap
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /api/agent-keys/value
+- path: /api/transactions/base-swap
+  method: post
+  operationId: postApiTransactionsBase-swap
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/transactions/bridge
+  method: post
+  operationId: postApiTransactionsBridge
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/balances
   method: get
-  operationId: getApiAgentKeysValue
+  operationId: getApiBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/wallets/
+  method: get
+  operationId: getApiWallets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/wallets/{id}
+  method: get
+  operationId: getApiWalletsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/wallets/{id}/balance
+  method: get
+  operationId: getApiWalletsByIdBalance
   x-agentic-access:
     action-class: connected
     consequence: read
