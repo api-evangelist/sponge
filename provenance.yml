@@ -10,11 +10,11 @@ artifacts:
     method: derived
     evidence: declared in the artifact
   arazzo/sponge-agent-onboarding.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/sponge-transfer-and-confirm.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   authentication/sponge-authentication.yml:
     method: searched
     evidence: declared in the artifact
@@ -93,127 +93,13 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
+  integrations/_index.yml:
     method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+    evidence: carries an API Evangelist house phrase
+  integrations/sponge-integration-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -297,6 +183,21 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/sponge-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -308,8 +209,8 @@ artifacts:
     evidence: declared in the artifact
   openapi/_original/sponge-openapi-original.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: the same operations as https://mintlify-s3-bucket-3cc1a52.s3.us-east-1.amazonaws.com/32c2acfd-8ca8-4031-9e3a-874d50a5e93a?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAULUIU2DMISKRXIWF%2F20261004%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20261004T224040Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAYaCXVzLWVhc3QtMSJGMEQCIAxh1KB13cnrN5mQ6KdF0vXJlMt%2BsDLGffr2ZeC82wZ6AiB3DPaK%2Fgp3u0%2FnMgy1eCdnCTpE5CBcOk4JDFilS3CSBiqWBAjP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDI5OTg2MDU0NTc1MiIM0Q%2F5zI38GNThkDphKuoDjLwkHYJuD2A9%2BZ18egYgLCv2a33upid1uMZaq5yXqiruBdSCA%2FiAzXuFAPdkgBoocSIr18JHutWdDpZd3VnXBXzhv%2FraO9brQrk6E01I6jjpUg1MdxrcVvP%2BOLURs5%2B8zH303ymO6MANGjTWjOyQggA6ZDkzPehviQ8zLx%2FLFTI%2BntLRqBvE5huZsqlSxIrqFMP8tKMvONGC5uDhJobGIE76Fji9Kdldc%2BAzkXQWg02Ftd%2BK4pssd4sY34VCuJfayXVk4KakSPabOF1iQhhkqVcc8BmzP3JWPwhIHsG0VYeagCUe49ogoW4Yn%2Fji0rngSYMsgqHK5VwbUQG46mzXTQPLJs4HYO2yhQ6u8yxF6lW7B3kMKTe6xTL3cbigW0eKytHl8lBg7CsOfrp1mXdcli59YArljrZHLSqC2xxmy%2Frx%2BQey%2BQM685nYvFu9p7w%2BCsKBjNqrksjoEqH0JZ1Bd%2BcLgeYwRw3BNH6X0aMu8T0e%2BNITs%2BXTTo3YKMOXdA6jFELTmKWHRZ5pDMNfSBBpa8vuK6wtL9CaNoFHXEHn5SEH91LtjTOUPusCQ8xuitdsg1b1xnO7EY04FldIs1UeqxAx0tJvMEMmFKJbAC1R9B%2FjZIYtIvsaVhRENxhIAjVqkCffU5IAi5huoTDElovWBjqmAenN7dM0J8DxfARdQu%2FKETJxR8FGPsIJAR69ugn9utc0wRC8XcYSTbLZZO1eO41bf03k5tur0xKNwaneY1yUmSKwima%2BL3JXnyGcX0hg7X%2FfNLaK8KM10xLqPKQnoixOWxaRfNHrXpGRMfsSxW17a8Tr1ahU7D9mjmBONKhzEJKrUjmMq%2FGMCAibb%2BctKaCxSf643lydRdztwaPTVoLOFWx6IVu%2BAPM%3D&X-Amz-Signature=bc63f16f7d81150e27d1128acdad2bcee87003d1bd63bd922f4d3d49b03c4acc&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject
+      (sha256 80822a66e90b, fetched 2026-10-04)
   openapi/sponge-agents-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -341,8 +242,8 @@ artifacts:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   overlays/sponge-openapi-overlay.yaml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   packages/sponge-packages.yml:
     method: searched
     evidence: declared in the artifact
